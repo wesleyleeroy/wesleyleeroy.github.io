@@ -248,7 +248,7 @@
 <h2 class="text-3xl font-bold text-brand-dark mb-3 font-display">Ready to Buy?</h2>
 <p class="text-slate-500 text-lg mb-10 max-w-md mx-auto">Send me a message to reserve an item or ask any questions.</p>
 <div class="w-full max-w-lg mb-10">
-<div class="group relative flex flex-col md:flex-row items-center justify-center gap-3 bg-slate-50 border border-slate-200 rounded-2xl p-6 hover:border-brand-primary/30 hover:shadow-md transition-all cursor-pointer">
+<div id="emailCopyBtn" class="group relative flex flex-col md:flex-row items-center justify-center gap-3 bg-slate-50 border border-slate-200 rounded-2xl p-6 hover:border-brand-primary/30 hover:shadow-md transition-all cursor-pointer">
 <span class="material-symbols-outlined text-slate-400 group-hover:text-brand-primary">email</span>
 <span class="text-lg md:text-xl font-bold text-brand-dark font-body break-all">wesleyleeroy06@gmail.com</span>
 <div class="md:ml-auto bg-white px-3 py-1 rounded-lg text-xs font-bold text-slate-400 shadow-sm group-hover:text-brand-primary">COPY</div>
@@ -304,4 +304,28 @@
 </div>
 </div>
 </footer>
+<script>
+document.getElementById('emailCopyBtn').addEventListener('click', function() {
+    const email = 'wesleyleeroy06@gmail.com';
+    const copyBtn = this.querySelector('div');
+    const originalText = copyBtn.textContent;
+
+    navigator.clipboard.writeText(email).then(function() {
+        copyBtn.textContent = 'COPIED!';
+        copyBtn.classList.add('text-brand-primary');
+
+        setTimeout(function() {
+            copyBtn.textContent = originalText;
+            copyBtn.classList.remove('text-brand-primary');
+        }, 2000);
+    }).catch(function(err) {
+        console.error('Failed to copy email:', err);
+        copyBtn.textContent = 'FAILED';
+
+        setTimeout(function() {
+            copyBtn.textContent = originalText;
+        }, 2000);
+    });
+});
+</script>
 </body></html>
