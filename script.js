@@ -78,7 +78,7 @@ function contactAboutItem(itemId) {
         document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
         
         // Optional: You could pre-fill a contact form or show a message
-        alert(`Interested in ${item.title}? Email me at your-email@example.com with "Item #${itemId}" in the subject!`);
+        alert(`Interested in ${item.title}? Email me at wesleyleeroy@gmail.com with "Item #${itemId}" in the subject!`);
     }
 }
 
