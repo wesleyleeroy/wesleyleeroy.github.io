@@ -3,7 +3,7 @@ const items = [
     {
         id: 1,
         title: "Vintage Camera",
-        price: "$9.99",
+        price: "$19.99",
         description: "Classic film camera in excellent condition. Fully functional.",
         image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"
     },
