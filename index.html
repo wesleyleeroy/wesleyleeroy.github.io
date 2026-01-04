@@ -169,32 +169,32 @@
 </div>
 <div class="features-sticky-container relative">
 <div class="feature-card bg-white rounded-3xl p-10 border border-slate-200 soft-shadow sticky top-20" data-index="0">
-<div class="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 text-white mb-6">
+<div class="feature-icon inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 text-white mb-6">
 <span class="material-symbols-outlined text-3xl">shield_check</span>
 </div>
-<h3 class="text-2xl font-bold text-brand-dark mb-3 font-display">Secure Transactions</h3>
-<p class="text-slate-500 text-lg leading-relaxed">All payments are processed through trusted platforms with buyer protection.</p>
+<h3 class="feature-heading text-2xl font-bold text-brand-dark mb-3 font-display">Secure Transactions</h3>
+<p class="feature-text text-slate-500 text-lg leading-relaxed">All payments are processed through trusted platforms with buyer protection.</p>
 </div>
 <div class="feature-card bg-white rounded-3xl p-10 border border-slate-200 soft-shadow sticky top-20" data-index="1">
-<div class="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 text-white mb-6">
+<div class="feature-icon inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 text-white mb-6">
 <span class="material-symbols-outlined text-3xl">verified</span>
 </div>
-<h3 class="text-2xl font-bold text-brand-dark mb-3 font-display">Quality Verified</h3>
-<p class="text-slate-500 text-lg leading-relaxed">Every item is thoroughly inspected and verified before listing.</p>
+<h3 class="feature-heading text-2xl font-bold text-brand-dark mb-3 font-display">Quality Verified</h3>
+<p class="feature-text text-slate-500 text-lg leading-relaxed">Every item is thoroughly inspected and verified before listing.</p>
 </div>
 <div class="feature-card bg-white rounded-3xl p-10 border border-slate-200 soft-shadow sticky top-20" data-index="2">
-<div class="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-500 to-red-500 text-white mb-6">
+<div class="feature-icon inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-500 to-red-500 text-white mb-6">
 <span class="material-symbols-outlined text-3xl">local_shipping</span>
 </div>
-<h3 class="text-2xl font-bold text-brand-dark mb-3 font-display">Fast Shipping</h3>
-<p class="text-slate-500 text-lg leading-relaxed">Items ship within 24 hours with tracking provided for all orders.</p>
+<h3 class="feature-heading text-2xl font-bold text-brand-dark mb-3 font-display">Fast Shipping</h3>
+<p class="feature-text text-slate-500 text-lg leading-relaxed">Items ship within 24 hours with tracking provided for all orders.</p>
 </div>
 <div class="feature-card bg-white rounded-3xl p-10 border border-slate-200 soft-shadow sticky top-20" data-index="3">
-<div class="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-green-500 to-teal-500 text-white mb-6">
+<div class="feature-icon inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-green-500 to-teal-500 text-white mb-6">
 <span class="material-symbols-outlined text-3xl">support_agent</span>
 </div>
-<h3 class="text-2xl font-bold text-brand-dark mb-3 font-display">Friendly Support</h3>
-<p class="text-slate-500 text-lg leading-relaxed">Direct communication with the seller for any questions or concerns.</p>
+<h3 class="feature-heading text-2xl font-bold text-brand-dark mb-3 font-display">Friendly Support</h3>
+<p class="feature-text text-slate-500 text-lg leading-relaxed">Direct communication with the seller for any questions or concerns.</p>
 </div>
 </div>
 </div>
@@ -433,10 +433,13 @@ gsap.registerPlugin(ScrollTrigger);
 // stiffness: 100, damping: 20 approximates to elastic.out with specific params
 const springEase = "elastic.out(1, 0.5)";
 
-// Sticky Card Stacking Animation with Mask Reveal
+// Sticky Card Stacking Animation with Mask Reveal and Staggered Element Animations
 const featureCards = gsap.utils.toArray('.feature-card');
 featureCards.forEach((card, index) => {
   const isLast = index === featureCards.length - 1;
+  const icon = card.querySelector('.feature-icon');
+  const heading = card.querySelector('.feature-heading');
+  const text = card.querySelector('.feature-text');
 
   ScrollTrigger.create({
     trigger: card,
@@ -451,6 +454,34 @@ featureCards.forEach((card, index) => {
       gsap.to(card, {
         scale: 1,
         duration: 0.6,
+        ease: springEase
+      });
+
+      // Staggered animations for card elements
+      // Icon slides in from left
+      gsap.from(icon, {
+        x: -50,
+        opacity: 0,
+        duration: 0.8,
+        delay: 0.3,
+        ease: springEase
+      });
+
+      // Heading fades in and slides up
+      gsap.from(heading, {
+        y: 20,
+        opacity: 0,
+        duration: 0.8,
+        delay: 0.5,
+        ease: springEase
+      });
+
+      // Text fades in from right
+      gsap.from(text, {
+        x: 30,
+        opacity: 0,
+        duration: 0.8,
+        delay: 0.7,
         ease: springEase
       });
     },
@@ -529,13 +560,12 @@ gsap.from('.feature-subtitle', {
   ease: springEase
 });
 
-// Inventory section title animation - same as features
+// Inventory section title animation - play once and stay visible
 gsap.from('.inventory-title', {
   scrollTrigger: {
     trigger: '.inventory-title',
     start: 'top 80%',
-    end: 'bottom 20%',
-    toggleActions: 'play reverse play reverse'
+    toggleActions: 'play none none none'
   },
   opacity: 0,
   y: 20,
@@ -547,8 +577,7 @@ gsap.from('.inventory-subtitle', {
   scrollTrigger: {
     trigger: '.inventory-subtitle',
     start: 'top 80%',
-    end: 'bottom 20%',
-    toggleActions: 'play reverse play reverse'
+    toggleActions: 'play none none none'
   },
   opacity: 0,
   y: 20,
@@ -561,8 +590,7 @@ gsap.from('.inventory-badge', {
   scrollTrigger: {
     trigger: '.inventory-badge',
     start: 'top 80%',
-    end: 'bottom 20%',
-    toggleActions: 'play reverse play reverse'
+    toggleActions: 'play none none none'
   },
   opacity: 0,
   scale: 0.9,
