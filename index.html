@@ -140,8 +140,8 @@
 
         /* Scroll reveal animation */
         .scroll-reveal {
-            opacity: 0;
-            transform: translateY(40px);
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .scroll-reveal.revealed {
@@ -149,8 +149,8 @@
         }
 
         .scroll-reveal-fade {
-            opacity: 0;
-            transform: translateY(30px);
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .scroll-reveal-fade.revealed {
@@ -457,7 +457,7 @@ document.getElementById('emailCopyBtn').addEventListener('click', function() {
     });
 });
 
-// Scroll reveal animations with wave effects
+// Scroll reveal animations with wave effects - content visible by default
 const observerOptions = {
     threshold: 0.15,
     rootMargin: '0px 0px -100px 0px'
@@ -481,19 +481,6 @@ const observer = new IntersectionObserver((entries) => {
 document.addEventListener('DOMContentLoaded', () => {
     const revealElements = document.querySelectorAll('.scroll-reveal, .scroll-reveal-fade');
     revealElements.forEach(el => observer.observe(el));
-
-    // Staggered animation for product cards
-    const productCards = document.querySelectorAll('.grid > div');
-    productCards.forEach((card, index) => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(30px)';
-        card.style.transition = 'opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-
-        setTimeout(() => {
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-        }, 300 + (index * 150));
-    });
 });
 </script>
 </body></html>
