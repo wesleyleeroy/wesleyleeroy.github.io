@@ -213,6 +213,7 @@
             width: 100vw;
             margin: 0;
             padding: 0;
+            display: flex;
         }
 
         .marquee-content {
@@ -220,20 +221,21 @@
             animation: marquee 35s linear infinite;
             padding-left: 0;
             margin-left: 0;
+            flex-shrink: 0;
         }
 
         @keyframes marquee {
-            0% {
+            from {
                 transform: translateX(-100%);
             }
-            100% {
-                transform: translateX(0%);
+            to {
+                transform: translateX(0);
             }
         }
     </style>
 </head>
 <body class="bg-bg-page text-slate-600 font-body overflow-x-hidden selection:bg-brand-primary/20 selection:text-brand-dark">
-<nav class="sticky top-0 z-50 w-full relative overflow-hidden" style="background-image: url('background.jpg'); background-size: cover; background-position: center top; background-attachment: fixed;">
+<nav class="sticky top-0 z-50 w-full relative" style="background-image: url('background.jpg'); background-size: cover; background-position: center top; background-attachment: fixed; box-shadow: none;">
 <div class="absolute inset-0 w-full h-full">
 <div class="absolute inset-0 bg-bg-page/50 backdrop-blur-md"></div>
 </div>
@@ -246,8 +248,8 @@
 <span class="text-brand-dark text-xl font-bold tracking-tight font-display">Wesley's<span class="text-brand-primary font-normal">Shop</span></span>
 </div>
 <div class="hidden md:flex items-center gap-8">
-<a class="text-sm font-bold text-slate-500 hover:text-brand-primary transition-colors font-display" href="#inventory">Browse Items</a>
-<a class="text-sm font-bold text-slate-500 hover:text-brand-primary transition-colors font-display" href="#contact">Contact</a>
+<a class="text-lg font-bold text-brand-dark hover:text-brand-primary transition-colors font-display" href="#inventory">Browse Items</a>
+<a class="text-lg font-bold text-brand-dark hover:text-brand-primary transition-colors font-display" href="#contact">Contact</a>
 </div>
 <a id="nav-btn" class="shine-button hidden md:flex h-10 items-center justify-center rounded-md bg-transparent border-2 border-black px-6 text-sm font-bold text-black transition-all hover:bg-black hover:text-white font-display" href="#contact">
                 Get in Touch
@@ -294,9 +296,12 @@
             </a>
 </div>
 </div>
-<div class="marquee absolute bottom-20 left-0 w-full">
+<div class="marquee absolute bottom-8 left-0 w-full">
 <div class="marquee-content text-6xl sm:text-8xl font-bold font-display" style="background: linear-gradient(90deg, #8b6914, #b8860b, #daa520, #b8860b, #8b6914); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: brightness(1.2) contrast(1.1);">
-                Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;
+                Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+<div class="marquee-content text-6xl sm:text-8xl font-bold font-display" style="background: linear-gradient(90deg, #8b6914, #b8860b, #daa520, #b8860b, #8b6914); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: brightness(1.2) contrast(1.1);" aria-hidden="true">
+                Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
 </div>
 </header>
@@ -840,6 +845,27 @@ shineButtons.forEach(btn => {
       spark.style.opacity = '0';
     });
   });
+});
+
+// Hide/show navigation on scroll
+let lastScrollTop = 0;
+const nav = document.querySelector('nav');
+const navHeight = nav.offsetHeight;
+
+window.addEventListener('scroll', () => {
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+  if (scrollTop > lastScrollTop && scrollTop > navHeight) {
+    // Scrolling down & past nav height
+    nav.style.transform = 'translateY(-100%)';
+    nav.style.transition = 'transform 0.3s ease-in-out';
+  } else if (scrollTop < lastScrollTop) {
+    // Scrolling up
+    nav.style.transform = 'translateY(0)';
+    nav.style.transition = 'transform 0.3s ease-in-out';
+  }
+
+  lastScrollTop = scrollTop;
 });
 </script>
 <style>
