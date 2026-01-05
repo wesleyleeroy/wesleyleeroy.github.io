@@ -86,22 +86,123 @@
 
         .feature-card {
             margin-bottom: 2rem;
-            clip-path: circle(0% at 50% 50%);
         }
 
-        .feature-card.revealed {
-            animation: maskReveal 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+        /* =====================================================
+           ELEMENTIS-INSPIRED SCROLL ANIMATIONS
+           ===================================================== */
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
         }
 
-        @keyframes maskReveal {
-            0% {
-                clip-path: circle(0% at 50% 50%);
-                opacity: 0;
-            }
-            100% {
-                clip-path: circle(150% at 50% 50%);
-                opacity: 1;
-            }
+        /* Text masking reveal container */
+        .text-reveal-wrap {
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .text-reveal {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(120%);
+        }
+
+        /* Image clip reveal */
+        .img-reveal {
+            opacity: 0;
+            clip-path: inset(100% 0 0 0);
+        }
+
+        /* Fade up reveal */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        /* Scale fade reveal */
+        .scale-fade {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        /* Parallax elements */
+        .parallax-slow {
+            will-change: transform;
+        }
+
+        /* Shining polish effect on button - intense blacksmith spark style */
+        .shine-button {
+            position: relative;
+            overflow: visible;
+        }
+
+        /* Bright white-hot center */
+        .shine-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle,
+                rgba(255, 255, 255, 1) 0%,
+                rgba(255, 245, 220, 0.95) 10%,
+                rgba(255, 220, 150, 0.8) 25%,
+                rgba(255, 180, 80, 0.5) 45%,
+                rgba(255, 140, 40, 0) 70%);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.15s ease;
+            filter: blur(8px);
+            mix-blend-mode: screen;
+            border-radius: 50%;
+        }
+
+        /* Outer glow and spark dispersion */
+        .shine-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle,
+                rgba(255, 220, 100, 0.7) 0%,
+                rgba(255, 180, 80, 0.5) 15%,
+                rgba(255, 140, 60, 0.3) 30%,
+                rgba(255, 100, 40, 0.15) 50%,
+                rgba(255, 80, 20, 0) 70%);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.15s ease;
+            filter: blur(20px);
+            mix-blend-mode: screen;
+            border-radius: 50%;
+        }
+
+        .shine-button:hover::before,
+        .shine-button:hover::after {
+            opacity: 1;
+        }
+
+        /* Spark particles */
+        .spark-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle,
+                rgba(255, 255, 255, 1) 0%,
+                rgba(255, 220, 120, 0.9) 20%,
+                rgba(255, 180, 80, 0.6) 40%,
+                rgba(255, 140, 50, 0) 100%);
+            pointer-events: none;
+            opacity: 0;
+            filter: blur(2px);
+            transition: opacity 0.3s ease-out, left 0.1s ease-out, top 0.1s ease-out;
+            mix-blend-mode: screen;
+            border-radius: 50%;
         }
     </style>
 </head>
@@ -119,7 +220,7 @@
 <a class="text-sm font-bold text-slate-500 hover:text-brand-primary transition-colors font-display" href="#inventory">Browse Items</a>
 <a class="text-sm font-bold text-slate-500 hover:text-brand-primary transition-colors font-display" href="#contact">Contact</a>
 </div>
-<a class="hidden md:flex h-10 items-center justify-center rounded-full bg-brand-dark px-6 text-sm font-bold text-white transition-all hover:bg-brand-primary hover:shadow-lg hover:shadow-brand-primary/30 font-display" href="#contact">
+<a id="nav-btn" class="shine-button hidden md:flex h-10 items-center justify-center rounded-full bg-brand-dark px-6 text-sm font-bold text-white transition-all hover:bg-brand-primary hover:shadow-lg hover:shadow-brand-primary/30 font-display" href="#contact">
                 Get in Touch
             </a>
 <div class="md:hidden">
@@ -130,32 +231,37 @@
 </div>
 </div>
 </nav>
-<header class="relative w-full py-20 lg:py-32 overflow-hidden">
+<header class="relative w-full py-20 lg:py-32 overflow-hidden" id="hero">
 <div class="absolute inset-0 w-full h-full">
-<img src="background.jpg" alt="" class="w-full h-full object-cover opacity-40" />
+<img src="background.jpg" alt="" class="parallax-slow img-reveal w-full h-full object-cover opacity-40" id="hero-bg" />
 <div class="absolute inset-0 bg-gradient-to-b from-bg-page/50 to-bg-page/70"></div>
 </div>
 <div class="absolute top-0 right-0 -mr-20 -mt-20 w-[500px] h-[500px] bg-brand-neutral/20 rounded-full blur-3xl pointer-events-none mix-blend-multiply opacity-70"></div>
 <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-[500px] h-[500px] bg-brand-soft/20 rounded-full blur-3xl pointer-events-none mix-blend-multiply opacity-70"></div>
 <div class="relative z-10 mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8 flex flex-col items-center">
-<div class="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-brand-dark shadow-sm mb-8 border border-slate-100 animate-float">
+<div class="scale-fade inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-brand-dark shadow-sm mb-8 border border-slate-100 animate-float">
 <span class="text-brand-primary material-symbols-outlined text-lg">waving_hand</span>
             Welcome to my shop!
         </div>
 <h1 class="mx-auto max-w-4xl text-5xl font-bold tracking-tight text-slate-900 sm:text-7xl mb-6 font-display">
-<span class="text-gradient bg-gradient-to-r from-brand-primary via-brand-accent to-brand-dark">Wesley's Items</span> <br class="hidden sm:block"/>
-<span class="text-gradient bg-gradient-to-r from-brand-primary via-brand-accent to-brand-dark">For Sale</span>
+<div class="text-reveal-wrap">
+<span class="text-reveal text-gradient bg-gradient-to-r from-brand-primary via-brand-accent to-brand-dark">Wesley's Items</span>
+</div>
+<br class="hidden sm:block"/>
+<div class="text-reveal-wrap">
+<span class="text-reveal text-gradient bg-gradient-to-r from-brand-primary via-brand-accent to-brand-dark">For Sale</span>
+</div>
 </h1>
-<p class="mx-auto max-w-2xl text-lg text-slate-500 mb-10 leading-relaxed">
+<p class="fade-up mx-auto max-w-2xl text-lg text-slate-500 mb-10 leading-relaxed">
             Discover a curated collection of premium digital and physical goods. <br/>
             Simple, secure, and friendly transactions.
         </p>
 <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
-<a class="w-full sm:w-auto h-14 px-8 rounded-full bg-brand-primary text-white font-bold flex items-center justify-center gap-2 hover:bg-brand-dark transition-all shadow-lg shadow-brand-primary/30 text-lg font-display" href="#inventory">
+<a id="shine-btn" class="shine-button fade-up w-full sm:w-auto h-14 px-8 rounded-full bg-brand-primary text-white font-bold flex items-center justify-center gap-2 hover:bg-brand-dark transition-all shadow-lg shadow-brand-primary/30 text-lg font-display" href="#inventory">
 <span class="material-symbols-outlined">shopping_bag</span>
                 Start Browsing
             </a>
-<a class="w-full sm:w-auto h-14 px-8 rounded-full bg-white border border-slate-200 text-brand-dark font-bold flex items-center justify-center gap-2 hover:border-brand-primary hover:text-brand-primary transition-all shadow-sm hover:shadow-md text-lg font-display" href="#contact">
+<a id="contact-btn" class="shine-button fade-up w-full sm:w-auto h-14 px-8 rounded-full bg-white border border-slate-200 text-brand-dark font-bold flex items-center justify-center gap-2 hover:border-brand-primary hover:text-brand-primary transition-all shadow-sm hover:shadow-md text-lg font-display" href="#contact">
                 Contact Me
             </a>
 </div>
@@ -172,34 +278,50 @@
 <div class="feature-icon inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 text-white mb-6">
 <span class="material-symbols-outlined text-3xl">shield_check</span>
 </div>
-<h3 class="feature-heading text-2xl font-bold text-brand-dark mb-3 font-display">Secure Transactions</h3>
+<h3 class="text-2xl font-bold text-brand-dark mb-3 font-display">
+<div class="text-reveal-wrap">
+<span class="text-reveal feature-heading">Secure Transactions</span>
+</div>
+</h3>
 <p class="feature-text text-slate-500 text-lg leading-relaxed">All payments are processed through trusted platforms with buyer protection.</p>
 </div>
 <div class="feature-card bg-white rounded-3xl p-10 border border-slate-200 soft-shadow sticky top-20" data-index="1">
 <div class="feature-icon inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 text-white mb-6">
 <span class="material-symbols-outlined text-3xl">verified</span>
 </div>
-<h3 class="feature-heading text-2xl font-bold text-brand-dark mb-3 font-display">Quality Verified</h3>
+<h3 class="text-2xl font-bold text-brand-dark mb-3 font-display">
+<div class="text-reveal-wrap">
+<span class="text-reveal feature-heading">Quality Verified</span>
+</div>
+</h3>
 <p class="feature-text text-slate-500 text-lg leading-relaxed">Every item is thoroughly inspected and verified before listing.</p>
 </div>
 <div class="feature-card bg-white rounded-3xl p-10 border border-slate-200 soft-shadow sticky top-20" data-index="2">
 <div class="feature-icon inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-500 to-red-500 text-white mb-6">
 <span class="material-symbols-outlined text-3xl">local_shipping</span>
 </div>
-<h3 class="feature-heading text-2xl font-bold text-brand-dark mb-3 font-display">Fast Shipping</h3>
+<h3 class="text-2xl font-bold text-brand-dark mb-3 font-display">
+<div class="text-reveal-wrap">
+<span class="text-reveal feature-heading">Fast Shipping</span>
+</div>
+</h3>
 <p class="feature-text text-slate-500 text-lg leading-relaxed">Items ship within 24 hours with tracking provided for all orders.</p>
 </div>
 <div class="feature-card bg-white rounded-3xl p-10 border border-slate-200 soft-shadow sticky top-20" data-index="3">
 <div class="feature-icon inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-green-500 to-teal-500 text-white mb-6">
 <span class="material-symbols-outlined text-3xl">support_agent</span>
 </div>
-<h3 class="feature-heading text-2xl font-bold text-brand-dark mb-3 font-display">Friendly Support</h3>
+<h3 class="text-2xl font-bold text-brand-dark mb-3 font-display">
+<div class="text-reveal-wrap">
+<span class="text-reveal feature-heading">Friendly Support</span>
+</div>
+</h3>
 <p class="feature-text text-slate-500 text-lg leading-relaxed">Direct communication with the seller for any questions or concerns.</p>
 </div>
 </div>
 </div>
 </section>
-<section class="py-24 relative" id="inventory">
+<section class="py-12 relative" id="inventory">
 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
 <div class="mb-16 flex justify-center">
 <div class="w-full max-w-4xl rounded-3xl overflow-hidden shadow-lg border border-slate-200">
@@ -433,81 +555,18 @@ gsap.registerPlugin(ScrollTrigger);
 // stiffness: 100, damping: 20 approximates to elastic.out with specific params
 const springEase = "elastic.out(1, 0.5)";
 
-// Sticky Card Stacking Animation with Mask Reveal and Staggered Element Animations
+// Feature cards - no animations, just display normally with sticky positioning
 const featureCards = gsap.utils.toArray('.feature-card');
+
 featureCards.forEach((card, index) => {
   const isLast = index === featureCards.length - 1;
-  const icon = card.querySelector('.feature-icon');
-  const heading = card.querySelector('.feature-heading');
-  const text = card.querySelector('.feature-text');
 
   ScrollTrigger.create({
     trigger: card,
     start: 'top 100px',
     end: isLast ? 'bottom 100px' : 'bottom top',
     pin: true,
-    pinSpacing: false,
-    onEnter: () => {
-      // Add mask reveal class
-      card.classList.add('revealed');
-
-      gsap.to(card, {
-        scale: 1,
-        duration: 0.6,
-        ease: springEase
-      });
-
-      // Staggered animations for card elements
-      // Icon slides in from left
-      gsap.from(icon, {
-        x: -50,
-        opacity: 0,
-        duration: 0.8,
-        delay: 0.3,
-        ease: springEase
-      });
-
-      // Heading fades in and slides up
-      gsap.from(heading, {
-        y: 20,
-        opacity: 0,
-        duration: 0.8,
-        delay: 0.5,
-        ease: springEase
-      });
-
-      // Text fades in from right
-      gsap.from(text, {
-        x: 30,
-        opacity: 0,
-        duration: 0.8,
-        delay: 0.7,
-        ease: springEase
-      });
-    },
-    onLeave: () => {
-      if (!isLast) {
-        gsap.to(card, {
-          scale: 0.95 - (index * 0.05),
-          duration: 0.4,
-          ease: "power2.out"
-        });
-      }
-    },
-    onEnterBack: () => {
-      // Ensure revealed class is present
-      card.classList.add('revealed');
-
-      gsap.to(card, {
-        scale: 1,
-        duration: 0.6,
-        ease: springEase
-      });
-    },
-    onLeaveBack: () => {
-      // Remove revealed class when scrolling back up past the card
-      card.classList.remove('revealed');
-    }
+    pinSpacing: false
   });
 });
 
@@ -530,34 +589,6 @@ productCards.forEach((card, index) => {
     delay: index * 0.1,
     ease: springEase
   });
-});
-
-// Feature section title animation - repeatable
-gsap.from('.feature-title', {
-  scrollTrigger: {
-    trigger: '.feature-title',
-    start: 'top 80%',
-    end: 'bottom 20%',
-    toggleActions: 'play reverse play reverse'
-  },
-  opacity: 0,
-  y: 20,
-  duration: 0.8,
-  ease: springEase
-});
-
-gsap.from('.feature-subtitle', {
-  scrollTrigger: {
-    trigger: '.feature-subtitle',
-    start: 'top 80%',
-    end: 'bottom 20%',
-    toggleActions: 'play reverse play reverse'
-  },
-  opacity: 0,
-  y: 20,
-  duration: 0.8,
-  delay: 0.1,
-  ease: springEase
 });
 
 // Inventory section title animation - play once and stay visible
@@ -619,5 +650,171 @@ productCards.forEach((card) => {
     });
   });
 });
+
+// ==========================================
+// ELEMENTIS-INSPIRED SCROLL ANIMATIONS
+// ==========================================
+
+// Elementis easing
+const elementisEase = "cubic-bezier(.24, .43, .15, .97)";
+
+// Text reveal animations with masking effect
+gsap.utils.toArray('.text-reveal').forEach((text, index) => {
+  gsap.to(text, {
+    scrollTrigger: {
+      trigger: text,
+      start: 'top 85%',
+      toggleActions: 'play none none none'
+    },
+    y: 0,
+    opacity: 1,
+    duration: 1.2,
+    delay: index * 0.15,
+    ease: elementisEase
+  });
+});
+
+// Image clip-path reveals
+gsap.utils.toArray('.img-reveal').forEach((img) => {
+  gsap.to(img, {
+    scrollTrigger: {
+      trigger: img,
+      start: 'top 80%',
+      toggleActions: 'play none none none'
+    },
+    clipPath: 'inset(0% 0 0 0)',
+    opacity: 1,
+    duration: 1.5,
+    ease: elementisEase
+  });
+});
+
+// Fade up animations
+gsap.utils.toArray('.fade-up').forEach((element, index) => {
+  gsap.to(element, {
+    scrollTrigger: {
+      trigger: element,
+      start: 'top 85%',
+      toggleActions: 'play none none none'
+    },
+    y: 0,
+    opacity: 1,
+    duration: 1,
+    delay: index * 0.1,
+    ease: elementisEase
+  });
+});
+
+// Scale fade animations
+gsap.utils.toArray('.scale-fade').forEach((element) => {
+  gsap.to(element, {
+    scrollTrigger: {
+      trigger: element,
+      start: 'top 85%',
+      toggleActions: 'play none none none'
+    },
+    scale: 1,
+    opacity: 1,
+    duration: 0.8,
+    ease: elementisEase
+  });
+});
+
+// Parallax background effect with scroll scrubbing
+gsap.to('#hero-bg', {
+  scrollTrigger: {
+    trigger: '#hero',
+    start: 'top top',
+    end: 'bottom top',
+    scrub: 1.5
+  },
+  y: '30%',
+  scale: 1.15,
+  ease: 'none'
+});
+
+// Feature section titles with stagger - repeats on scroll
+gsap.from('.feature-title', {
+  scrollTrigger: {
+    trigger: '.feature-title',
+    start: 'top 80%',
+    end: 'bottom 20%',
+    toggleActions: 'play reverse play reverse'
+  },
+  y: 40,
+  opacity: 0,
+  scale: 0.95,
+  duration: 1,
+  ease: elementisEase
+});
+
+gsap.from('.feature-subtitle', {
+  scrollTrigger: {
+    trigger: '.feature-subtitle',
+    start: 'top 80%',
+    end: 'bottom 20%',
+    toggleActions: 'play reverse play reverse'
+  },
+  y: 20,
+  opacity: 0,
+  duration: 0.8,
+  delay: 0.2,
+  ease: elementisEase
+});
+
+// Shining polish effect on all buttons with spark particles
+const shineButtons = document.querySelectorAll('.shine-button');
+shineButtons.forEach(btn => {
+  let sparkParticles = [];
+
+  // Create spark particles
+  for (let i = 0; i < 12; i++) {
+    const spark = document.createElement('div');
+    spark.className = 'spark-particle';
+    btn.appendChild(spark);
+    sparkParticles.push(spark);
+  }
+
+  btn.addEventListener('mousemove', (e) => {
+    const rect = btn.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    btn.style.setProperty('--shine-x', `${x}px`);
+    btn.style.setProperty('--shine-y', `${y}px`);
+
+    // Animate spark particles
+    sparkParticles.forEach((spark, index) => {
+      const angle = (index / sparkParticles.length) * Math.PI * 2;
+      const distance = 20 + Math.random() * 30;
+      const offsetX = Math.cos(angle) * distance;
+      const offsetY = Math.sin(angle) * distance;
+
+      spark.style.left = `${x + offsetX}px`;
+      spark.style.top = `${y + offsetY}px`;
+      spark.style.transform = `rotate(${angle * (180 / Math.PI)}deg)`;
+      spark.style.opacity = '0.8';
+
+      // Fade out particles
+      setTimeout(() => {
+        spark.style.opacity = '0';
+      }, 50);
+    });
+  });
+
+  btn.addEventListener('mouseleave', () => {
+    sparkParticles.forEach(spark => {
+      spark.style.opacity = '0';
+    });
+  });
+});
 </script>
+<style>
+.shine-button::before {
+  transform: translate(var(--shine-x, -100px), var(--shine-y, -100px)) translate(-50%, -50%);
+}
+.shine-button::after {
+  transform: translate(var(--shine-x, -100px), var(--shine-y, -100px)) translate(-50%, -50%);
+}
+</style>
 </body></html>
