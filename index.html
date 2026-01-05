@@ -204,6 +204,32 @@
             mix-blend-mode: screen;
             border-radius: 50%;
         }
+
+        /* Scrolling marquee text */
+        .marquee {
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            width: 100vw;
+            margin: 0;
+            padding: 0;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 35s linear infinite;
+            padding-left: 0;
+            margin-left: 0;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(0%);
+            }
+        }
     </style>
 </head>
 <body class="bg-bg-page text-slate-600 font-body overflow-x-hidden selection:bg-brand-primary/20 selection:text-brand-dark">
@@ -267,6 +293,11 @@
                 Contact Me
             </a>
 </div>
+</div>
+<div class="marquee absolute bottom-20 left-0 w-full">
+<div class="marquee-content text-6xl sm:text-8xl font-bold font-display" style="background: linear-gradient(90deg, #8b6914, #b8860b, #daa520, #b8860b, #8b6914); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: brightness(1.2) contrast(1.1);">
+                Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
 </div>
 </header>
 <section class="relative py-32 overflow-hidden bg-gradient-to-b from-bg-page to-white" id="features">
