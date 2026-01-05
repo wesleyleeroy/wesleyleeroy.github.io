@@ -13,7 +13,7 @@
 <!-- Security: Permissions policy - Disable unnecessary browser features -->
 <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=()">
 <title>Wesley's Items For Sale</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link rel="icon" type="image/png" href="favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <!-- Security: Tailwind CSS from CDN (note: Tailwind CDN is for development; consider build process for production) -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -28,8 +28,8 @@
                         "brand-primary": "#01baefff","brand-dark": "#1f487eff","brand-accent": "#107e92ff","brand-soft": "#71b4c3ff","brand-neutral": "#cec0b3ff","bg-page": "#f0f9ff","bg-surface": "#ffffff",
                     },
                     fontFamily: {
-                        "display": ["Nunito", "sans-serif"],
-                        "body": ["Nunito", "sans-serif"],
+                        "display": ["Georgia", "serif"],
+                        "body": ["Georgia", "serif"],
                     },
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
@@ -206,11 +206,14 @@
         }
 
         /* Scrolling marquee text */
-        .marquee {
+        .marquee-wrapper {
             overflow: hidden;
+        }
+
+        .marquee {
             white-space: nowrap;
             position: relative;
-            width: 100vw;
+            width: 100%;
             margin: 0;
             padding: 0;
             display: flex;
@@ -240,12 +243,12 @@
 <div class="absolute inset-0 bg-bg-page/50 backdrop-blur-md"></div>
 </div>
 <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-<div class="flex h-20 items-center justify-between">
-<div class="flex items-center gap-2">
+<div class="flex h-20 items-center justify-between overflow-visible">
+<div class="flex items-baseline gap-2 py-2">
 <div class="bg-brand-primary/10 p-2 rounded-xl">
 <span class="material-symbols-outlined text-brand-primary text-2xl">storefront</span>
 </div>
-<span class="text-brand-dark text-xl font-bold tracking-tight font-display">Wesley's<span class="text-brand-primary font-normal">Shop</span></span>
+<span class="text-brand-dark text-xl font-bold tracking-tight font-display leading-loose">Wesley's<span class="text-brand-primary font-normal">Shop</span></span>
 </div>
 <div class="hidden md:flex items-center gap-8">
 <a class="text-lg font-bold text-brand-dark hover:text-brand-primary transition-colors font-display" href="#inventory">Browse Items</a>
@@ -262,7 +265,7 @@
 </div>
 </div>
 </nav>
-<header class="relative w-full py-20 lg:py-32 overflow-hidden" id="hero" style="background-image: url('background.jpg'); background-size: cover; background-position: center top; background-attachment: fixed;">
+<header class="relative w-full py-20 lg:py-32 overflow-visible" id="hero" style="background-image: url('background.jpg'); background-size: cover; background-position: center top; background-attachment: fixed;">
 <div class="absolute inset-0 w-full h-full">
 <div class="absolute inset-0 bg-gradient-to-b from-bg-page/50 to-bg-page/70"></div>
 </div>
@@ -287,26 +290,31 @@
             Simple, secure, and friendly transactions.
         </p>
 <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
-<a id="shine-btn" class="shine-button fade-up w-full sm:w-auto h-14 px-8 rounded-full bg-brand-primary text-white font-bold flex items-center justify-center gap-2 hover:bg-brand-dark transition-all shadow-lg shadow-brand-primary/30 text-lg font-display" href="#inventory">
+<a id="shine-btn" class="shine-button fade-up w-full sm:w-auto h-14 px-8 rounded-lg bg-brand-primary text-white font-bold flex items-center justify-center gap-2 hover:bg-brand-dark transition-all shadow-lg shadow-brand-primary/30 text-lg font-display" href="#inventory">
 <span class="material-symbols-outlined">shopping_bag</span>
                 Start Browsing
             </a>
-<a id="contact-btn" class="shine-button fade-up w-full sm:w-auto h-14 px-8 rounded-full bg-white border border-slate-200 text-brand-dark font-bold flex items-center justify-center gap-2 hover:border-brand-primary hover:text-brand-primary transition-all shadow-sm hover:shadow-md text-lg font-display" href="#contact">
+<a id="contact-btn" class="shine-button fade-up w-full sm:w-auto h-14 px-8 rounded-lg bg-white border border-slate-200 text-brand-dark font-bold flex items-center justify-center gap-2 hover:border-brand-primary hover:text-brand-primary transition-all shadow-sm hover:shadow-md text-lg font-display" href="#contact">
                 Contact Me
             </a>
 </div>
 </div>
-<div class="marquee absolute bottom-8 left-0 w-full">
+<div class="marquee-wrapper absolute bottom-[-40px] left-0 w-full overflow-hidden z-50">
+<div id="marquee-scroll" class="marquee w-full">
 <div class="marquee-content text-6xl sm:text-8xl font-bold font-display" style="background: linear-gradient(90deg, #8b6914, #b8860b, #daa520, #b8860b, #8b6914); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: brightness(1.2) contrast(1.1);">
-                Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;
+                Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
 <div class="marquee-content text-6xl sm:text-8xl font-bold font-display" style="background: linear-gradient(90deg, #8b6914, #b8860b, #daa520, #b8860b, #8b6914); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: brightness(1.2) contrast(1.1);" aria-hidden="true">
-                Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;
+                Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
 </div>
+</div>
 </header>
-<section class="relative py-32 overflow-hidden bg-gradient-to-b from-bg-page to-white" id="features">
-<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<section class="relative py-32 overflow-hidden" id="features" style="background-image: url('background.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
+<div class="absolute inset-0 w-full h-full">
+<div class="absolute inset-0 bg-gradient-to-b from-bg-page/70 via-bg-page/50 to-transparent"></div>
+</div>
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
 <div class="text-center mb-20">
 <h2 class="text-4xl font-bold text-brand-dark mb-4 font-display feature-title">Why Shop With Me?</h2>
 <p class="text-lg text-slate-500 feature-subtitle">A trusted marketplace experience with personal attention</p>
@@ -359,7 +367,10 @@
 </div>
 </div>
 </section>
-<section class="py-12 relative" id="inventory">
+<section class="py-12 relative" id="inventory" style="background-image: url('background.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
+<div class="absolute inset-0 w-full h-full pointer-events-none">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-white"></div>
+</div>
 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
 <div class="mb-16 flex justify-center">
 <div class="w-full max-w-4xl rounded-3xl overflow-hidden shadow-lg border border-slate-200">
@@ -706,8 +717,8 @@ gsap.utils.toArray('.text-reveal').forEach((text, index) => {
     },
     y: 0,
     opacity: 1,
-    duration: 1.2,
-    delay: index * 0.15,
+    duration: 0.6,
+    delay: index * 0.08,
     ease: elementisEase
   });
 });
@@ -847,13 +858,16 @@ shineButtons.forEach(btn => {
   });
 });
 
-// Hide/show navigation on scroll
+// Hide/show navigation on scroll + marquee scroll effect
 let lastScrollTop = 0;
 const nav = document.querySelector('nav');
 const navHeight = nav.offsetHeight;
+const marquee = document.getElementById('marquee-scroll');
+let marqueeOffset = 0;
 
 window.addEventListener('scroll', () => {
   const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  const scrollDelta = scrollTop - lastScrollTop;
 
   if (scrollTop > lastScrollTop && scrollTop > navHeight) {
     // Scrolling down & past nav height
@@ -864,6 +878,10 @@ window.addEventListener('scroll', () => {
     nav.style.transform = 'translateY(0)';
     nav.style.transition = 'transform 0.3s ease-in-out';
   }
+
+  // Marquee scroll effect: down = move left (negative), up = move right (positive)
+  marqueeOffset -= scrollDelta * 0.5; // Adjust multiplier for speed
+  marquee.style.transform = `translateX(${marqueeOffset}px)`;
 
   lastScrollTop = scrollTop;
 });
