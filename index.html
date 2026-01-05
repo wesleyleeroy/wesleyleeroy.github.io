@@ -367,18 +367,25 @@
 </div>
 </div>
 </section>
-<section class="py-12 relative" id="inventory" style="background-image: url('background.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
+<section class="pt-28 pb-12 relative" id="inventory" style="background-image: url('background.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
 <div class="absolute inset-0 w-full h-full pointer-events-none">
 <div class="absolute inset-0 bg-gradient-to-b from-transparent to-white"></div>
 </div>
 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-<div class="mb-16 flex justify-center">
+<div class="mb-8 flex justify-center">
 <div class="w-full max-w-4xl rounded-3xl overflow-hidden shadow-lg border border-slate-200">
 <video class="w-full" autoplay loop muted playsinline disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback">
 <source src="cards-video.mov" type="video/quicktime">
 <source src="cards-video.mov" type="video/mp4">
 Your browser does not support the video tag.
 </video>
+</div>
+</div>
+<div class="mt-8 mb-8 flex justify-end">
+<div class="w-full max-w-2xl overflow-hidden shadow-lg">
+<div class="upenn-image-wrapper overflow-hidden relative" style="height: 550px;">
+    <img id="upenn-image" src="upenn.webp" alt="UPenn" class="absolute left-0 w-full object-cover" style="height: 160%; top: -20%; will-change: transform;">
+</div>
 </div>
 </div>
 <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
@@ -865,6 +872,10 @@ const navHeight = nav.offsetHeight;
 const marquee = document.getElementById('marquee-scroll');
 let marqueeOffset = 0;
 
+// UPenn image parallax effect
+const upennImage = document.getElementById('upenn-image');
+const upennWrapper = document.querySelector('.upenn-image-wrapper');
+
 window.addEventListener('scroll', () => {
   const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
   const scrollDelta = scrollTop - lastScrollTop;
@@ -883,6 +894,28 @@ window.addEventListener('scroll', () => {
   marqueeOffset -= scrollDelta * 0.5; // Adjust multiplier for speed
   marquee.style.transform = `translateX(${marqueeOffset}px)`;
 
+  // UPenn image parallax effect
+    if (upennWrapper && upennImage) {
+        const wrapperRect = upennWrapper.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        // Calculate full scroll distance (Window + Element Height)
+        const totalTravelDistance = windowHeight + wrapperRect.height;
+        const currentTravel = windowHeight - wrapperRect.top;
+        
+        // Progress 0 to 1
+        let progress = currentTravel / totalTravelDistance;
+
+        // --- CHANGE THIS NUMBER TO CONTROL SPEED ---
+        // Old value: 30. New value: 50.
+        // Higher number = More sliding.
+        const movementRange = 50; 
+        
+        const movement = (progress - 0.5) * movementRange;
+
+        upennImage.style.transform = `translateY(${movement}%)`;
+        upennImage.style.clipPath = 'none'; 
+    }
   lastScrollTop = scrollTop;
 });
 </script>
