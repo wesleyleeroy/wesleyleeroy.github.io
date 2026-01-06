@@ -97,10 +97,16 @@
             scroll-behavior: smooth;
         }
 
-        /* Text masking reveal container */
+/* Text masking reveal container */
+/* Text masking reveal container */
+/* Text masking reveal container */
         .text-reveal-wrap {
             overflow: hidden;
             display: inline-block;
+            /* Small buffer for the animation */
+            padding-bottom: 15px; 
+            margin-bottom: -15px; 
+            vertical-align: bottom;
         }
 
         .text-reveal {
@@ -276,12 +282,12 @@
 <span class="text-brand-primary material-symbols-outlined text-lg">waving_hand</span>
             Welcome to my shop!
         </div>
-<h1 class="mx-auto max-w-4xl text-5xl font-bold tracking-tight text-slate-900 sm:text-7xl mb-6 font-display">
+<h1 class="mx-auto max-w-4xl text-5xl font-bold tracking-tight text-slate-900 sm:text-7xl mb-6 font-display leading-tight">
 <div class="text-reveal-wrap">
 <span class="text-reveal text-gradient bg-gradient-to-r from-brand-primary via-brand-accent to-brand-dark">Wesley's Items</span>
 </div>
 <br class="hidden sm:block"/>
-<div class="text-reveal-wrap">
+<div class="text-reveal-wrap mt-4">
 <span class="text-reveal text-gradient bg-gradient-to-r from-brand-primary via-brand-accent to-brand-dark">For Sale</span>
 </div>
 </h1>
@@ -290,13 +296,14 @@
             Simple, secure, and friendly transactions.
         </p>
 <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
-<a id="shine-btn" class="shine-button fade-up w-full sm:w-auto h-14 px-8 rounded-lg bg-brand-primary text-white font-bold flex items-center justify-center gap-2 hover:bg-brand-dark transition-all shadow-lg shadow-brand-primary/30 text-lg font-display" href="#inventory">
-<span class="material-symbols-outlined">shopping_bag</span>
-                Start Browsing
-            </a>
-<a id="contact-btn" class="shine-button fade-up w-full sm:w-auto h-14 px-8 rounded-lg bg-white border border-slate-200 text-brand-dark font-bold flex items-center justify-center gap-2 hover:border-brand-primary hover:text-brand-primary transition-all shadow-sm hover:shadow-md text-lg font-display" href="#contact">
-                Contact Me
-            </a>
+    <a id="shine-btn" class="shine-button fade-up w-full sm:w-auto h-14 px-8 rounded-lg bg-brand-primary text-white font-bold flex items-center justify-center gap-2 hover:bg-brand-dark transition-colors transition-shadow shadow-lg shadow-brand-primary/30 text-lg font-display" href="#inventory">
+        <span class="material-symbols-outlined">shopping_bag</span>
+        Start Browsing
+    </a>
+    
+    <a id="contact-btn" class="shine-button fade-up w-full sm:w-auto h-14 px-8 rounded-lg bg-white border border-slate-200 text-brand-dark font-bold flex items-center justify-center gap-2 hover:border-brand-primary hover:text-brand-primary transition-colors transition-shadow shadow-sm hover:shadow-md text-lg font-display" href="#contact">
+        Contact Me
+    </a>
 </div>
 </div>
 <div class="marquee-wrapper absolute bottom-[-40px] left-0 w-full overflow-hidden z-50">
@@ -726,7 +733,11 @@ gsap.utils.toArray('.text-reveal').forEach((text, index) => {
     opacity: 1,
     duration: 0.6,
     delay: index * 0.08,
-    ease: elementisEase
+    ease: elementisEase,
+    // NEW: Remove the mask after animation so the 'y' tail is never cut off
+    onComplete: () => {
+        text.parentElement.style.overflow = 'visible';
+    }
   });
 });
 
@@ -755,9 +766,9 @@ gsap.utils.toArray('.fade-up').forEach((element, index) => {
     },
     y: 0,
     opacity: 1,
-    duration: 1,
-    delay: index * 0.1,
-    ease: elementisEase
+    duration: 0.6,
+    delay: 0,
+    ease: "linear"
   });
 });
 
