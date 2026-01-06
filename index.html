@@ -15,6 +15,7 @@
 <title>Wesley's Items For Sale</title>
 <link rel="icon" type="image/png" href="favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
 <!-- Security: Tailwind CSS from CDN (note: Tailwind CDN is for development; consider build process for production) -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <!-- Security: GSAP with Subresource Integrity (SRI) for tamper protection -->
@@ -28,8 +29,8 @@
                         "brand-primary": "#01baefff","brand-dark": "#1f487eff","brand-accent": "#107e92ff","brand-soft": "#71b4c3ff","brand-neutral": "#cec0b3ff","bg-page": "#f0f9ff","bg-surface": "#ffffff",
                     },
                     fontFamily: {
-                        "display": ["Georgia", "serif"],
-                        "body": ["Georgia", "serif"],
+                        "display": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
                     },
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
@@ -98,14 +99,12 @@
         }
 
 /* Text masking reveal container */
-/* Text masking reveal container */
-/* Text masking reveal container */
         .text-reveal-wrap {
             overflow: hidden;
             display: inline-block;
-            /* Small buffer for the animation */
-            padding-bottom: 15px; 
-            margin-bottom: -15px; 
+            /* Increased buffer to accommodate descenders like 'y' */
+            padding-bottom: 30px;
+            margin-bottom: -30px;
             vertical-align: bottom;
         }
 
