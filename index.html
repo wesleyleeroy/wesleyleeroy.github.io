@@ -15,7 +15,7 @@
 <title>Wesley's Items For Sale</title>
 <link rel="icon" type="image/png" href="favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
 <!-- Security: Tailwind CSS from CDN (note: Tailwind CDN is for development; consider build process for production) -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <!-- Security: GSAP with Subresource Integrity (SRI) for tamper protection -->
@@ -29,8 +29,8 @@
                         "brand-primary": "#01baefff","brand-dark": "#1f487eff","brand-accent": "#107e92ff","brand-soft": "#71b4c3ff","brand-neutral": "#cec0b3ff","bg-page": "#f0f9ff","bg-surface": "#ffffff",
                     },
                     fontFamily: {
-                        "display": ["Inter", "sans-serif"],
-                        "body": ["Inter", "sans-serif"],
+                        "display": ["Outfit", "sans-serif"],
+                        "body": ["Outfit", "sans-serif"],
                     },
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
@@ -240,14 +240,29 @@
                 transform: translateX(0);
             }
         }
+
+        /* Fixed background video */
+        .fixed-bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+        }
     </style>
 </head>
-<body class="bg-bg-page text-slate-600 font-body overflow-x-hidden selection:bg-brand-primary/20 selection:text-brand-dark">
-<nav class="sticky top-0 z-50 w-full relative" style="background-image: url('background.jpg'); background-size: cover; background-position: center top; background-attachment: fixed; box-shadow: none;">
-<div class="absolute inset-0 w-full h-full">
-<div class="absolute inset-0 bg-bg-page/50 backdrop-blur-md"></div>
-</div>
-<div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<body class="bg-transparent text-slate-600 font-body overflow-x-hidden selection:bg-brand-primary/20 selection:text-brand-dark">
+
+<video class="fixed-bg-video" autoplay loop muted playsinline preload="auto">
+    <source src="background final final.mp4" type="video/mp4">
+</video>
+
+<div class="fixed inset-0 w-full h-full z-[-1] bg-white/60 backdrop-blur-[2px]"></div>
+<nav class="sticky top-0 z-50 w-full" style="box-shadow: none;">
+    
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 <div class="flex h-20 items-center justify-between overflow-visible">
 <div class="flex items-baseline gap-2 py-2">
 <div class="bg-brand-primary/10 p-2 rounded-xl">
@@ -270,10 +285,8 @@
 </div>
 </div>
 </nav>
-<header class="relative w-full py-20 lg:py-32 overflow-visible" id="hero" style="background-image: url('background.jpg'); background-size: cover; background-position: center top; background-attachment: fixed;">
-<div class="absolute inset-0 w-full h-full">
-<div class="absolute inset-0 bg-gradient-to-b from-bg-page/50 to-bg-page/70"></div>
-</div>
+<header class="relative w-full py-20 lg:py-32 overflow-visible" id="hero">
+
 <div class="absolute top-0 right-0 -mr-20 -mt-20 w-[500px] h-[500px] bg-brand-neutral/20 rounded-full blur-3xl pointer-events-none mix-blend-multiply opacity-70"></div>
 <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-[500px] h-[500px] bg-brand-soft/20 rounded-full blur-3xl pointer-events-none mix-blend-multiply opacity-70"></div>
 <div class="relative z-10 mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8 flex flex-col items-center">
@@ -316,10 +329,8 @@
 </div>
 </div>
 </header>
-<section class="relative py-32 overflow-hidden" id="features" style="background-image: url('background.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
-<div class="absolute inset-0 w-full h-full">
-<div class="absolute inset-0 bg-gradient-to-b from-bg-page/70 via-bg-page/50 to-transparent"></div>
-</div>
+<section class="relative py-32 overflow-hidden" id="features">
+
 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
 <div class="text-center mb-20">
 <h2 class="text-4xl font-bold text-brand-dark mb-4 font-display feature-title">Why Shop With Me?</h2>
@@ -373,10 +384,8 @@
 </div>
 </div>
 </section>
-<section class="pt-28 pb-12 relative" id="inventory" style="background-image: url('background.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
-<div class="absolute inset-0 w-full h-full pointer-events-none">
-<div class="absolute inset-0 bg-gradient-to-b from-transparent to-white"></div>
-</div>
+<section class="pt-28 pb-12 relative" id="inventory">
+
 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
 <div class="mb-8 flex justify-center">
 <div class="w-full max-w-4xl rounded-3xl overflow-hidden shadow-lg border border-slate-200">
@@ -928,6 +937,57 @@ window.addEventListener('scroll', () => {
     }
   lastScrollTop = scrollTop;
 });
+
+// Water ripple effect on mouse movement
+let lastRippleTime = 0;
+const rippleThrottle = 100; // Create ripple every 100ms at most
+
+document.addEventListener('mousemove', (e) => {
+  const currentTime = Date.now();
+
+  // Throttle ripple creation
+  if (currentTime - lastRippleTime < rippleThrottle) {
+    return;
+  }
+
+  lastRippleTime = currentTime;
+  createRipple(e.clientX, e.clientY);
+});
+
+// Also create ripple on click
+document.addEventListener('click', (e) => {
+  createRipple(e.clientX, e.clientY);
+});
+
+function createRipple(x, y) {
+  // Create 3 ripples with slight delays for a bubbly effect
+  for (let i = 0; i < 3; i++) {
+    setTimeout(() => {
+      const ripple = document.createElement('div');
+      ripple.className = 'ripple';
+
+      // Position the ripple at the mouse coordinates (centered)
+      ripple.style.left = `${x}px`;
+      ripple.style.top = `${y}px`;
+
+      // Add slight random offset for more organic bubble effect
+      const offsetX = (Math.random() - 0.5) * 20;
+      const offsetY = (Math.random() - 0.5) * 20;
+      ripple.style.transform = `translate(calc(-50% + ${offsetX}px), calc(-50% + ${offsetY}px))`;
+
+      // Vary the size slightly for each ripple
+      const sizeVariation = 0.7 + (Math.random() * 0.6);
+      ripple.style.setProperty('--size-multiplier', sizeVariation);
+
+      document.body.appendChild(ripple);
+
+      // Remove the ripple after animation completes
+      setTimeout(() => {
+        ripple.remove();
+      }, 1200);
+    }, i * 100); // Stagger the ripples
+  }
+}
 </script>
 <style>
 .shine-button::before {
