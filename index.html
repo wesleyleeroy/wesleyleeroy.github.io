@@ -1,1000 +1,1148 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<!-- Security Headers: Content Security Policy (CSP) - Protects against XSS attacks -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https: data:; media-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
-<!-- Security: Prevent clickjacking attacks -->
-<meta http-equiv="X-Frame-Options" content="DENY">
-<!-- Security: Enable XSS protection in older browsers -->
-<meta http-equiv="X-Content-Type-Options" content="nosniff">
-<!-- Security: Referrer policy - Don't leak URL information -->
-<meta name="referrer" content="strict-origin-when-cross-origin">
-<!-- Security: Permissions policy - Disable unnecessary browser features -->
-<meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=()">
-<title>Wesley's Items For Sale</title>
-<link rel="icon" type="image/png" href="favicon.png">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
-<!-- Security: Tailwind CSS from CDN (note: Tailwind CDN is for development; consider build process for production) -->
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<!-- Security: GSAP with Subresource Integrity (SRI) for tamper protection -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script id="tailwind-config">
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        "brand-primary": "#01baefff","brand-dark": "#1f487eff","brand-accent": "#107e92ff","brand-soft": "#71b4c3ff","brand-neutral": "#cec0b3ff","bg-page": "#f0f9ff","bg-surface": "#ffffff",
-                    },
-                    fontFamily: {
-                        "display": ["Outfit", "sans-serif"],
-                        "body": ["Outfit", "sans-serif"],
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-10px)' },
-                        }
-                    }
-                },
-            },
-        }
-    </script>
-<style>::-webkit-scrollbar {
-            width: 10px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f0f9ff; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #cec0b3ff; 
-            border-radius: 10px;
-            border: 2px solid #f0f9ff;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #71b4c3ff; 
-        }
-        .text-gradient {
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-image: linear-gradient(90deg, #60a5fa, #01baefff, #107e92ff, #01baefff, #60a5fa);
-            background-size: 200% auto;
-            animation: gradient-shift 2.5s ease-in-out infinite;
-        }
+<html lang="en">
 
-        @keyframes gradient-shift {
-            0%, 100% {
-                background-position: 0% center;
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <!-- Security Headers: Content Security Policy (CSP) - Protects against XSS attacks -->
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; connect-src 'self' https://prod.spline.design https://unpkg.com; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https: data:; media-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
+  <!-- Security: Prevent clickjacking attacks -->
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <!-- Security: Enable XSS protection in older browsers -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <!-- Security: Referrer policy - Don't leak URL information -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <!-- Security: Permissions policy - Disable unnecessary browser features -->
+  <meta http-equiv="Permissions-Policy"
+    content="geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=()">
+  <title>Wesley's Items For Sale</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&amp;display=swap"
+    rel="stylesheet" />
+  <!-- Security: Tailwind CSS from CDN (note: Tailwind CDN is for development; consider build process for production) -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <!-- Security: GSAP with Subresource Integrity (SRI) for tamper protection -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+    integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+    integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+  <script id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            "brand-primary": "#01baefff", "brand-dark": "#1f487eff", "brand-accent": "#107e92ff", "brand-soft": "#71b4c3ff", "brand-neutral": "#cec0b3ff", "bg-page": "#f0f9ff", "bg-surface": "#ffffff",
+          },
+          fontFamily: {
+            "display": ["Outfit", "sans-serif"],
+            "body": ["Outfit", "sans-serif"],
+          },
+          animation: {
+            'float': 'float 6s ease-in-out infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' },
             }
-            50% {
-                background-position: 100% center;
-            }
-        }
-        .soft-shadow {
-            box-shadow: 0 20px 40px -15px rgba(31, 72, 126, 0.1);
-        }
+          }
+        },
+      },
+    }
+  </script>
+  <style>
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
 
-        /* Sticky feature cards styling */
-        .features-sticky-container {
-            min-height: 200vh;
-        }
+    ::-webkit-scrollbar-track {
+      background: #f0f9ff;
+    }
 
-        .feature-card {
-            margin-bottom: 2rem;
-        }
+    ::-webkit-scrollbar-thumb {
+      background: #cec0b3ff;
+      border-radius: 10px;
+      border: 2px solid #f0f9ff;
+    }
 
-        /* =====================================================
+    ::-webkit-scrollbar-thumb:hover {
+      background: #71b4c3ff;
+    }
+
+    .text-gradient {
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-image: linear-gradient(90deg, #60a5fa, #01baefff, #107e92ff, #01baefff, #60a5fa);
+      background-size: 200% auto;
+      animation: gradient-shift 2.5s ease-in-out infinite;
+    }
+
+    @keyframes gradient-shift {
+
+      0%,
+      100% {
+        background-position: 0% center;
+      }
+
+      50% {
+        background-position: 100% center;
+      }
+    }
+
+    .soft-shadow {
+      box-shadow: 0 20px 40px -15px rgba(31, 72, 126, 0.1);
+    }
+
+    /* Sticky feature cards styling */
+    .features-sticky-container {
+      min-height: 200vh;
+    }
+
+    .feature-card {
+      margin-bottom: 2rem;
+    }
+
+    /* =====================================================
            ELEMENTIS-INSPIRED SCROLL ANIMATIONS
            ===================================================== */
 
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
 
-/* Text masking reveal container */
-        .text-reveal-wrap {
-            overflow: hidden;
-            display: inline-block;
-            /* Increased buffer to accommodate descenders like 'y' */
-            padding-bottom: 30px;
-            margin-bottom: -30px;
-            vertical-align: bottom;
-        }
+    /* Text masking reveal container */
+    .text-reveal-wrap {
+      overflow: hidden;
+      display: inline-block;
+      /* Increased buffer to accommodate descenders like 'y' */
+      padding-bottom: 30px;
+      margin-bottom: -30px;
+      vertical-align: bottom;
+    }
 
-        .text-reveal {
-            display: inline-block;
-            opacity: 0;
-            transform: translateY(120%);
-        }
+    .text-reveal {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(120%);
+    }
 
-        /* Image clip reveal */
-        .img-reveal {
-            opacity: 0;
-            clip-path: inset(100% 0 0 0);
-        }
+    /* Image clip reveal */
+    .img-reveal {
+      opacity: 0;
+      clip-path: inset(100% 0 0 0);
+    }
 
-        /* Fade up reveal */
-        .fade-up {
-            opacity: 0;
-            transform: translateY(40px);
-        }
+    /* Fade up reveal */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+    }
 
-        /* Scale fade reveal */
-        .scale-fade {
-            opacity: 0;
-            transform: scale(0.9);
-        }
+    /* Scale fade reveal */
+    .scale-fade {
+      opacity: 0;
+      transform: scale(0.9);
+    }
 
-        /* Parallax elements */
-        .parallax-slow {
-            will-change: transform;
-        }
+    /* Parallax elements */
+    .parallax-slow {
+      will-change: transform;
+    }
 
-        /* Shining polish effect on button - intense blacksmith spark style */
-        .shine-button {
-            position: relative;
-            overflow: visible;
-        }
+    /* Shining polish effect on button - intense blacksmith spark style */
+    .shine-button {
+      position: relative;
+      overflow: visible;
+    }
 
-        /* Bright white-hot center */
-        .shine-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 80px;
-            height: 80px;
-            background: radial-gradient(circle,
-                rgba(255, 255, 255, 1) 0%,
-                rgba(255, 245, 220, 0.95) 10%,
-                rgba(255, 220, 150, 0.8) 25%,
-                rgba(255, 180, 80, 0.5) 45%,
-                rgba(255, 140, 40, 0) 70%);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.15s ease;
-            filter: blur(8px);
-            mix-blend-mode: screen;
-            border-radius: 50%;
-        }
+    /* Bright white-hot center */
+    .shine-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 80px;
+      height: 80px;
+      background: radial-gradient(circle,
+          rgba(255, 255, 255, 1) 0%,
+          rgba(255, 245, 220, 0.95) 10%,
+          rgba(255, 220, 150, 0.8) 25%,
+          rgba(255, 180, 80, 0.5) 45%,
+          rgba(255, 140, 40, 0) 70%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s ease;
+      filter: blur(8px);
+      mix-blend-mode: screen;
+      border-radius: 50%;
+    }
 
-        /* Outer glow and spark dispersion */
-        .shine-button::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 180px;
-            height: 180px;
-            background: radial-gradient(circle,
-                rgba(255, 220, 100, 0.7) 0%,
-                rgba(255, 180, 80, 0.5) 15%,
-                rgba(255, 140, 60, 0.3) 30%,
-                rgba(255, 100, 40, 0.15) 50%,
-                rgba(255, 80, 20, 0) 70%);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.15s ease;
-            filter: blur(20px);
-            mix-blend-mode: screen;
-            border-radius: 50%;
-        }
+    /* Outer glow and spark dispersion */
+    .shine-button::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle,
+          rgba(255, 220, 100, 0.7) 0%,
+          rgba(255, 180, 80, 0.5) 15%,
+          rgba(255, 140, 60, 0.3) 30%,
+          rgba(255, 100, 40, 0.15) 50%,
+          rgba(255, 80, 20, 0) 70%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s ease;
+      filter: blur(20px);
+      mix-blend-mode: screen;
+      border-radius: 50%;
+    }
 
-        .shine-button:hover::before,
-        .shine-button:hover::after {
-            opacity: 1;
-        }
+    .shine-button:hover::before,
+    .shine-button:hover::after {
+      opacity: 1;
+    }
 
-        /* Spark particles */
-        .spark-particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: radial-gradient(circle,
-                rgba(255, 255, 255, 1) 0%,
-                rgba(255, 220, 120, 0.9) 20%,
-                rgba(255, 180, 80, 0.6) 40%,
-                rgba(255, 140, 50, 0) 100%);
-            pointer-events: none;
-            opacity: 0;
-            filter: blur(2px);
-            transition: opacity 0.3s ease-out, left 0.1s ease-out, top 0.1s ease-out;
-            mix-blend-mode: screen;
-            border-radius: 50%;
-        }
+    /* Spark particles */
+    .spark-particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: radial-gradient(circle,
+          rgba(255, 255, 255, 1) 0%,
+          rgba(255, 220, 120, 0.9) 20%,
+          rgba(255, 180, 80, 0.6) 40%,
+          rgba(255, 140, 50, 0) 100%);
+      pointer-events: none;
+      opacity: 0;
+      filter: blur(2px);
+      transition: opacity 0.3s ease-out, left 0.1s ease-out, top 0.1s ease-out;
+      mix-blend-mode: screen;
+      border-radius: 50%;
+    }
 
-        /* Scrolling marquee text */
-        .marquee-wrapper {
-            overflow: hidden;
-        }
+    /* Scrolling marquee text */
+    .marquee-wrapper {
+      overflow: hidden;
+    }
 
-        .marquee {
-            white-space: nowrap;
-            position: relative;
-            width: 100%;
-            margin: 0;
-            padding: 0;
-            display: flex;
-        }
+    .marquee {
+      white-space: nowrap;
+      position: relative;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
 
-        .marquee-content {
-            display: inline-block;
-            animation: marquee 35s linear infinite;
-            padding-left: 0;
-            margin-left: 0;
-            flex-shrink: 0;
-        }
+    .marquee-content {
+      display: inline-block;
+      animation: marquee 35s linear infinite;
+      padding-left: 0;
+      margin-left: 0;
+      flex-shrink: 0;
+    }
 
-        @keyframes marquee {
-            from {
-                transform: translateX(-100%);
-            }
-            to {
-                transform: translateX(0);
-            }
-        }
+    @keyframes marquee {
+      from {
+        transform: translateX(-100%);
+      }
 
-        /* Fixed background video */
-        .fixed-bg-video {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
-            z-index: -1;
-        }
-    </style>
+      to {
+        transform: translateX(0);
+      }
+    }
+
+    /* Fixed background video */
+    .fixed-bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+    }
+  </style>
 </head>
-<body class="bg-transparent text-slate-600 font-body overflow-x-hidden selection:bg-brand-primary/20 selection:text-brand-dark">
 
-<video class="fixed-bg-video" autoplay loop muted playsinline preload="auto">
+<body
+  class="bg-transparent text-slate-600 font-body overflow-x-hidden selection:bg-brand-primary/20 selection:text-brand-dark">
+
+  <video class="fixed-bg-video" autoplay loop muted playsinline preload="auto">
     <source src="background final final.mp4" type="video/mp4">
-</video>
+  </video>
 
-<div class="fixed inset-0 w-full h-full z-[-1] bg-white/60 backdrop-blur-[2px]"></div>
-<nav class="sticky top-0 z-50 w-full" style="box-shadow: none;">
-    
+  <div class="fixed inset-0 w-full h-full z-[-1] bg-white/60 backdrop-blur-[2px]"></div>
+  <nav class="sticky top-0 z-50 w-full" style="box-shadow: none;">
+
     <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-<div class="flex h-20 items-center justify-between overflow-visible">
-<div class="flex items-baseline gap-2 py-2">
-<div class="bg-brand-primary/10 p-2 rounded-xl">
-<span class="material-symbols-outlined text-brand-primary text-2xl">storefront</span>
-</div>
-<span class="text-brand-dark text-xl font-bold tracking-tight font-display leading-loose">Wesley's<span class="text-brand-primary font-normal">Shop</span></span>
-</div>
-<div class="hidden md:flex items-center gap-8">
-<a class="text-lg font-bold text-brand-dark hover:text-brand-primary transition-colors font-display" href="#inventory">Browse Items</a>
-<a class="text-lg font-bold text-brand-dark hover:text-brand-primary transition-colors font-display" href="#contact">Contact</a>
-</div>
-<a id="nav-btn" class="shine-button hidden md:flex h-10 items-center justify-center rounded-md bg-transparent border-2 border-black px-6 text-sm font-bold text-black transition-all hover:bg-black hover:text-white font-display" href="#contact">
-                Get in Touch
-            </a>
-<div class="md:hidden">
-<button class="text-brand-dark p-2 hover:bg-slate-5 rounded-lg transition-colors">
-<span class="material-symbols-outlined">menu</span>
-</button>
-</div>
-</div>
-</div>
-</nav>
-<header class="relative w-full py-20 lg:py-32 overflow-visible" id="hero">
-
-<div class="absolute top-0 right-0 -mr-20 -mt-20 w-[500px] h-[500px] bg-brand-neutral/20 rounded-full blur-3xl pointer-events-none mix-blend-multiply opacity-70"></div>
-<div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-[500px] h-[500px] bg-brand-soft/20 rounded-full blur-3xl pointer-events-none mix-blend-multiply opacity-70"></div>
-<div class="relative z-10 mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8 flex flex-col items-center">
-<div class="scale-fade inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-brand-dark shadow-sm mb-8 border border-slate-100 animate-float">
-<span class="text-brand-primary material-symbols-outlined text-lg">waving_hand</span>
-            Welcome to my shop!
+      <div class="flex h-20 items-center justify-between overflow-visible">
+        <div class="flex items-baseline gap-2 py-2">
+          <div class="bg-brand-primary/10 p-2 rounded-xl">
+            <span class="material-symbols-outlined text-brand-primary text-2xl">storefront</span>
+          </div>
+          <span class="text-brand-dark text-xl font-bold tracking-tight font-display leading-loose">Wesley's<span
+              class="text-brand-primary font-normal">Shop</span></span>
         </div>
-<h1 class="mx-auto max-w-4xl text-5xl font-bold tracking-tight text-slate-900 sm:text-7xl mb-6 font-display leading-tight">
-<div class="text-reveal-wrap">
-<span class="text-reveal text-gradient bg-gradient-to-r from-brand-primary via-brand-accent to-brand-dark">Wesley's Items</span>
-</div>
-<br class="hidden sm:block"/>
-<div class="text-reveal-wrap mt-4">
-<span class="text-reveal text-gradient bg-gradient-to-r from-brand-primary via-brand-accent to-brand-dark">For Sale</span>
-</div>
-</h1>
-<p class="fade-up mx-auto max-w-2xl text-lg text-slate-500 mb-10 leading-relaxed">
-            Discover a curated collection of premium digital and physical goods. <br/>
-            Simple, secure, and friendly transactions.
-        </p>
-<div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
-    <a id="shine-btn" class="shine-button fade-up w-full sm:w-auto h-14 px-8 rounded-lg bg-brand-primary text-white font-bold flex items-center justify-center gap-2 hover:bg-brand-dark transition-colors transition-shadow shadow-lg shadow-brand-primary/30 text-lg font-display" href="#inventory">
-        <span class="material-symbols-outlined">shopping_bag</span>
-        Start Browsing
-    </a>
-    
-    <a id="contact-btn" class="shine-button fade-up w-full sm:w-auto h-14 px-8 rounded-lg bg-white border border-slate-200 text-brand-dark font-bold flex items-center justify-center gap-2 hover:border-brand-primary hover:text-brand-primary transition-colors transition-shadow shadow-sm hover:shadow-md text-lg font-display" href="#contact">
-        Contact Me
-    </a>
-</div>
-</div>
-<div class="marquee-wrapper absolute bottom-[-40px] left-0 w-full overflow-hidden z-50">
-<div id="marquee-scroll" class="marquee w-full">
-<div class="marquee-content text-6xl sm:text-8xl font-bold font-display" style="background: linear-gradient(90deg, #8b6914, #b8860b, #daa520, #b8860b, #8b6914); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: brightness(1.2) contrast(1.1);">
-                Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;
+        <div class="hidden md:flex items-center gap-8">
+          <a class="text-lg font-bold text-brand-dark hover:text-brand-primary transition-colors font-display"
+            href="#inventory">Browse Items</a>
+          <a class="text-lg font-bold text-brand-dark hover:text-brand-primary transition-colors font-display"
+            href="#contact">Contact</a>
+        </div>
+        <a id="nav-btn"
+          class="shine-button hidden md:flex h-10 items-center justify-center rounded-md bg-transparent border-2 border-black px-6 text-sm font-bold text-black transition-all hover:bg-black hover:text-white font-display"
+          href="#contact">
+          Get in Touch
+        </a>
+        <div class="md:hidden">
+          <button class="text-brand-dark p-2 hover:bg-slate-5 rounded-lg transition-colors">
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <header class="relative w-full py-20 lg:py-32 overflow-visible" id="hero">
+
+    <div
+      class="absolute top-0 right-0 -mr-20 -mt-20 w-[500px] h-[500px] bg-brand-neutral/20 rounded-full blur-3xl pointer-events-none mix-blend-multiply opacity-70">
+    </div>
+    <div
+      class="absolute bottom-0 left-0 -ml-20 -mb-20 w-[500px] h-[500px] bg-brand-soft/20 rounded-full blur-3xl pointer-events-none mix-blend-multiply opacity-70">
+    </div>
+    <div class="relative z-10 mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8 flex flex-col items-center">
+      <div
+        class="scale-fade inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-brand-dark shadow-sm mb-8 border border-slate-100 animate-float">
+        <span class="text-brand-primary material-symbols-outlined text-lg">waving_hand</span>
+        Welcome to my shop!
+      </div>
+      <h1
+        class="mx-auto max-w-4xl text-5xl font-bold tracking-tight text-slate-900 sm:text-7xl mb-6 font-display leading-tight">
+        <div class="text-reveal-wrap">
+          <span
+            class="text-reveal text-gradient bg-gradient-to-r from-brand-primary via-brand-accent to-brand-dark">Wesley's
+            Items</span>
+        </div>
+        <br class="hidden sm:block" />
+        <div class="text-reveal-wrap mt-4">
+          <span class="text-reveal text-gradient bg-gradient-to-r from-brand-primary via-brand-accent to-brand-dark">For
+            Sale</span>
+        </div>
+      </h1>
+      <p class="fade-up mx-auto max-w-2xl text-lg text-slate-500 mb-10 leading-relaxed">
+        Discover a curated collection of premium digital and physical goods. <br />
+        Simple, secure, and friendly transactions.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
+        <a id="shine-btn"
+          class="shine-button fade-up w-full sm:w-auto h-14 px-8 rounded-lg bg-brand-primary text-white font-bold flex items-center justify-center gap-2 hover:bg-brand-dark transition-colors transition-shadow shadow-lg shadow-brand-primary/30 text-lg font-display"
+          href="#inventory">
+          <span class="material-symbols-outlined">shopping_bag</span>
+          Start Browsing
+        </a>
+
+        <a id="contact-btn"
+          class="shine-button fade-up w-full sm:w-auto h-14 px-8 rounded-lg bg-white border border-slate-200 text-brand-dark font-bold flex items-center justify-center gap-2 hover:border-brand-primary hover:text-brand-primary transition-colors transition-shadow shadow-sm hover:shadow-md text-lg font-display"
+          href="#contact">
+          Contact Me
+        </a>
+      </div>
+    </div>
+    <div class="marquee-wrapper absolute bottom-[-40px] left-0 w-full overflow-hidden z-50">
+      <div id="marquee-scroll" class="marquee w-full">
+        <div class="marquee-content text-6xl sm:text-8xl font-bold font-display"
+          style="background: linear-gradient(90deg, #8b6914, #b8860b, #daa520, #b8860b, #8b6914); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: brightness(1.2) contrast(1.1);">
+          Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the
+          future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the
+          future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+        <div class="marquee-content text-6xl sm:text-8xl font-bold font-display"
+          style="background: linear-gradient(90deg, #8b6914, #b8860b, #daa520, #b8860b, #8b6914); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: brightness(1.2) contrast(1.1);"
+          aria-hidden="true">
+          Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the
+          future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the
+          future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+      </div>
+    </div>
+  </header>
+  <section class="relative py-32 overflow-hidden" id="features">
+
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center mb-20">
+        <h2 class="text-4xl font-bold text-brand-dark mb-4 font-display feature-title">Why Shop With Me?</h2>
+        <p class="text-lg text-slate-500 feature-subtitle">A trusted marketplace experience with personal attention</p>
+      </div>
+      <div class="features-sticky-container relative">
+        <div class="feature-card bg-white rounded-3xl p-10 border border-slate-200 soft-shadow sticky top-20"
+          data-index="0">
+          <div
+            class="feature-icon inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 text-white mb-6">
+            <span class="material-symbols-outlined text-3xl">shield_check</span>
+          </div>
+          <h3 class="text-2xl font-bold text-brand-dark mb-3 font-display">
+            <div class="text-reveal-wrap">
+              <span class="text-reveal feature-heading">Secure Transactions</span>
             </div>
-<div class="marquee-content text-6xl sm:text-8xl font-bold font-display" style="background: linear-gradient(90deg, #8b6914, #b8860b, #daa520, #b8860b, #8b6914); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: brightness(1.2) contrast(1.1);" aria-hidden="true">
-                Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;Defining the future&nbsp;&nbsp;&nbsp;&nbsp;
+          </h3>
+          <p class="feature-text text-slate-500 text-lg leading-relaxed">All payments are processed through trusted
+            platforms with buyer protection.</p>
+        </div>
+        <div class="feature-card bg-white rounded-3xl p-10 border border-slate-200 soft-shadow sticky top-20"
+          data-index="1">
+          <div
+            class="feature-icon inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 text-white mb-6">
+            <span class="material-symbols-outlined text-3xl">verified</span>
+          </div>
+          <h3 class="text-2xl font-bold text-brand-dark mb-3 font-display">
+            <div class="text-reveal-wrap">
+              <span class="text-reveal feature-heading">Quality Verified</span>
             </div>
-</div>
-</div>
-</header>
-<section class="relative py-32 overflow-hidden" id="features">
+          </h3>
+          <p class="feature-text text-slate-500 text-lg leading-relaxed">Every item is thoroughly inspected and verified
+            before listing.</p>
+        </div>
+        <div class="feature-card bg-white rounded-3xl p-10 border border-slate-200 soft-shadow sticky top-20"
+          data-index="2">
+          <div
+            class="feature-icon inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-500 to-red-500 text-white mb-6">
+            <span class="material-symbols-outlined text-3xl">local_shipping</span>
+          </div>
+          <h3 class="text-2xl font-bold text-brand-dark mb-3 font-display">
+            <div class="text-reveal-wrap">
+              <span class="text-reveal feature-heading">Fast Shipping</span>
+            </div>
+          </h3>
+          <p class="feature-text text-slate-500 text-lg leading-relaxed">Items ship within 24 hours with tracking
+            provided for all orders.</p>
+        </div>
+        <div class="feature-card bg-white rounded-3xl p-10 border border-slate-200 soft-shadow sticky top-20"
+          data-index="3">
+          <div
+            class="feature-icon inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-green-500 to-teal-500 text-white mb-6">
+            <span class="material-symbols-outlined text-3xl">support_agent</span>
+          </div>
+          <h3 class="text-2xl font-bold text-brand-dark mb-3 font-display">
+            <div class="text-reveal-wrap">
+              <span class="text-reveal feature-heading">Friendly Support</span>
+            </div>
+          </h3>
+          <p class="feature-text text-slate-500 text-lg leading-relaxed">Direct communication with the seller for any
+            questions or concerns.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="pt-28 pb-12 relative" id="inventory">
 
-<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-<div class="text-center mb-20">
-<h2 class="text-4xl font-bold text-brand-dark mb-4 font-display feature-title">Why Shop With Me?</h2>
-<p class="text-lg text-slate-500 feature-subtitle">A trusted marketplace experience with personal attention</p>
-</div>
-<div class="features-sticky-container relative">
-<div class="feature-card bg-white rounded-3xl p-10 border border-slate-200 soft-shadow sticky top-20" data-index="0">
-<div class="feature-icon inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 text-white mb-6">
-<span class="material-symbols-outlined text-3xl">shield_check</span>
-</div>
-<h3 class="text-2xl font-bold text-brand-dark mb-3 font-display">
-<div class="text-reveal-wrap">
-<span class="text-reveal feature-heading">Secure Transactions</span>
-</div>
-</h3>
-<p class="feature-text text-slate-500 text-lg leading-relaxed">All payments are processed through trusted platforms with buyer protection.</p>
-</div>
-<div class="feature-card bg-white rounded-3xl p-10 border border-slate-200 soft-shadow sticky top-20" data-index="1">
-<div class="feature-icon inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 text-white mb-6">
-<span class="material-symbols-outlined text-3xl">verified</span>
-</div>
-<h3 class="text-2xl font-bold text-brand-dark mb-3 font-display">
-<div class="text-reveal-wrap">
-<span class="text-reveal feature-heading">Quality Verified</span>
-</div>
-</h3>
-<p class="feature-text text-slate-500 text-lg leading-relaxed">Every item is thoroughly inspected and verified before listing.</p>
-</div>
-<div class="feature-card bg-white rounded-3xl p-10 border border-slate-200 soft-shadow sticky top-20" data-index="2">
-<div class="feature-icon inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-500 to-red-500 text-white mb-6">
-<span class="material-symbols-outlined text-3xl">local_shipping</span>
-</div>
-<h3 class="text-2xl font-bold text-brand-dark mb-3 font-display">
-<div class="text-reveal-wrap">
-<span class="text-reveal feature-heading">Fast Shipping</span>
-</div>
-</h3>
-<p class="feature-text text-slate-500 text-lg leading-relaxed">Items ship within 24 hours with tracking provided for all orders.</p>
-</div>
-<div class="feature-card bg-white rounded-3xl p-10 border border-slate-200 soft-shadow sticky top-20" data-index="3">
-<div class="feature-icon inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-green-500 to-teal-500 text-white mb-6">
-<span class="material-symbols-outlined text-3xl">support_agent</span>
-</div>
-<h3 class="text-2xl font-bold text-brand-dark mb-3 font-display">
-<div class="text-reveal-wrap">
-<span class="text-reveal feature-heading">Friendly Support</span>
-</div>
-</h3>
-<p class="feature-text text-slate-500 text-lg leading-relaxed">Direct communication with the seller for any questions or concerns.</p>
-</div>
-</div>
-</div>
-</section>
-<section class="pt-28 pb-12 relative" id="inventory">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="mb-8 flex justify-center">
+        <div class="w-full max-w-4xl rounded-3xl overflow-hidden shadow-lg border border-slate-200">
+          <video class="w-full" autoplay loop muted playsinline disablepictureinpicture
+            controlslist="nodownload nofullscreen noremoteplayback">
+            <source src="cards-video.mov" type="video/quicktime">
+            <source src="cards-video.mov" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+      <div class="mt-8 mb-8 flex justify-end">
+        <div class="w-full max-w-2xl overflow-hidden shadow-lg">
+          <div class="upenn-image-wrapper overflow-hidden relative" style="height: 550px;">
+            <img id="upenn-image" src="upenn.webp" alt="UPenn" class="absolute left-0 w-full object-cover"
+              style="height: 160%; top: -20%; will-change: transform;">
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+        <div>
+          <h2
+            class="text-3xl font-bold text-brand-dark tracking-tight flex items-center gap-3 font-display inventory-title">
+            <span class="bg-brand-soft/20 text-brand-accent p-2 rounded-xl material-symbols-outlined">inventory_2</span>
+            Available Items
+          </h2>
+          <p class="text-slate-500 mt-2 font-medium inventory-subtitle">Freshly stocked and ready for a new home.</p>
+        </div>
+        <div
+          class="flex items-center gap-2 text-sm text-brand-dark bg-white px-4 py-2 rounded-full border border-slate-100 shadow-sm inventory-badge">
+          <span class="material-symbols-outlined text-brand-primary text-lg">verified</span>
+          Verified Seller
+        </div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 products-grid">
+        <div
+          class="product-card group relative bg-white rounded-3xl overflow-hidden border border-slate-100 transition-all duration-300 soft-shadow hover:-translate-y-2">
+          <div class="aspect-video w-full overflow-hidden bg-slate-100 relative">
+            <div
+              class="absolute top-4 right-4 z-10 bg-white/90 backdrop-blur-sm shadow-sm text-brand-dark text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
+              <span class="material-symbols-outlined text-sm text-brand-primary">star</span> MINT
+            </div>
+            <div
+              class="w-full h-full bg-slate-200 flex items-center justify-center group-hover:scale-105 transition-transform duration-500"
+              style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDLK7m-BCFzm1eDND9jqA0SNNPEwgvAB9awC6dpyW5tOZGsIua1i55o7RlYSuK3me1_NSOlHRrl85K6q75hmI5JOudX-Qu8YU0tZhvmjLQsd_q2cvZmE0WqtyManZSFINl8aabEsUY_wNDmuyZPcI8lBpSP4f1PlpVxA9aeAVAZCOKMu7olorwoPHyvCNJtwMlaXQKsh7L_Lm3OGwC-Tzw5THxgCdu_m6ixmVzylafX7H3PyEIyugFhA-BDczSN47IUm6ScJRZj1oc'); background-size: cover; background-position: center;">
+            </div>
+          </div>
+          <div class="p-8">
+            <div class="flex justify-between items-start mb-3">
+              <h3 class="text-xl font-bold text-brand-dark font-display">Retro Console X</h3>
+              <span class="bg-brand-primary/10 text-brand-primary font-bold px-3 py-1 rounded-lg">$150</span>
+            </div>
+            <p class="text-slate-500 mb-6 line-clamp-2 text-sm">Vintage gaming system with original controllers and 5
+              game cartridges. Fully restored circuitry.</p>
+            <button
+              class="w-full h-12 rounded-xl bg-slate-50 hover:bg-brand-primary hover:text-white text-brand-dark text-sm font-bold transition-all flex items-center justify-center gap-2 font-display group-hover:shadow-lg group-hover:shadow-brand-primary/20">View
+              Details</button>
+          </div>
+        </div>
+        <div
+          class="product-card group relative bg-white rounded-3xl overflow-hidden border border-slate-100 transition-all duration-300 soft-shadow hover:-translate-y-2">
+          <div class="aspect-video w-full overflow-hidden bg-slate-100 relative">
+            <div
+              class="absolute top-4 right-4 z-10 bg-white/90 backdrop-blur-sm shadow-sm text-brand-dark text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
+              <span class="material-symbols-outlined text-sm text-brand-accent">key</span> DIGITAL
+            </div>
+            <div
+              class="w-full h-full bg-slate-200 flex items-center justify-center group-hover:scale-105 transition-transform duration-500"
+              style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA7RCGtuC2rbhINKtkvdLDwyd8wSLTaUywNhwnPZUCfJ4suirezca1zas2V_mTnmFTd8A1gV7kk0oSkSJQxfkMzsMtChbygzrz4brmJ6FG1R0_h0ozB5r-bF0ADSepNf8LKxN9Ap6Fsc52Mn_bn5iiuMh_imJ1gdRm-NWrvPB2S_yZe-SS7M2jovnfA28ET1Zyy6E1ktDMyHLFRfvcoGeO3UI6kLQpRljb0BR8S8cCanX34y04TwRzJU_vBfq2zX1yQSr3ogSe9pV0'); background-size: cover; background-position: center;">
+            </div>
+          </div>
+          <div class="p-8">
+            <div class="flex justify-between items-start mb-3">
+              <h3 class="text-xl font-bold text-brand-dark font-display">Pro Audio Suite</h3>
+              <span class="bg-brand-primary/10 text-brand-primary font-bold px-3 py-1 rounded-lg">$90</span>
+            </div>
+            <p class="text-slate-500 mb-6 line-clamp-2 text-sm">Lifetime license for top-tier audio production software.
+              Includes all future plugin updates.</p>
+            <button
+              class="w-full h-12 rounded-xl bg-slate-50 hover:bg-brand-primary hover:text-white text-brand-dark text-sm font-bold transition-all flex items-center justify-center gap-2 font-display group-hover:shadow-lg group-hover:shadow-brand-primary/20">View
+              Details</button>
+          </div>
+        </div>
+        <div
+          class="product-card group relative bg-white rounded-3xl overflow-hidden border border-slate-100 transition-all duration-300 soft-shadow hover:-translate-y-2">
+          <div class="aspect-video w-full overflow-hidden bg-slate-100 relative">
+            <div
+              class="w-full h-full bg-slate-200 flex items-center justify-center group-hover:scale-105 transition-transform duration-500"
+              style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDjWAm9bA7FzMoZjoOg963WGdEFSHnmXabzSeTxd1Zy9rQfLNuNdxA02tcvi6mZYcuyt0sub2Ke99LECFBiWOzsCp3G_QFd-Ok5CnhQ79DwlmuIiJzlOlawEQo1GNitVgq1kC35h8g21uRkMqo5UYTDSUuasgnHyXZRmxixLZGMcQppj4pueV4BjIZtD1cAU_DOtTf_aMgpM3dvpuk9Vq-1pFw1cZ-LrgBNHziVJLmTNwwTQQ0M9LY7vpyHVrsiZLZQyH0MJPBARfQ'); background-size: cover; background-position: center;">
+            </div>
+          </div>
+          <div class="p-8">
+            <div class="flex justify-between items-start mb-3">
+              <h3 class="text-xl font-bold text-brand-dark font-display">Limited Sneakers</h3>
+              <span class="bg-brand-primary/10 text-brand-primary font-bold px-3 py-1 rounded-lg">$220</span>
+            </div>
+            <p class="text-slate-500 mb-6 line-clamp-2 text-sm">Size 10 US. Never worn. Original box and verification
+              tags included. Collector's item.</p>
+            <button
+              class="w-full h-12 rounded-xl bg-slate-50 hover:bg-brand-primary hover:text-white text-brand-dark text-sm font-bold transition-all flex items-center justify-center gap-2 font-display group-hover:shadow-lg group-hover:shadow-brand-primary/20">View
+              Details</button>
+          </div>
+        </div>
+        <div
+          class="product-card group relative bg-white rounded-3xl overflow-hidden border border-slate-100 transition-all duration-300 soft-shadow hover:-translate-y-2">
+          <div class="aspect-video w-full overflow-hidden bg-slate-100 relative">
+            <div
+              class="w-full h-full bg-slate-200 flex items-center justify-center group-hover:scale-105 transition-transform duration-500"
+              style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDgs57_6f4iDEN-W9JRxfuXEMCObnHiD_YOl4x5h6Y3y-ohyyjIanmGuPZdi5R1TJGzOjCS-C7SiRDdUr1CZvQLE6Uu2aA7nfR4ZDOIhi6PmTNqW-8c3R9GDFJt2UKdAfuZAmifsIfZaVuLE_TSR1D3dtjmCVrldi8b0eJSLy-MmWShzpmgS1Gh-kECDMeMguhkqiKLsX4I9DHeJUGgADLCYeufnCEfORVdYKJUobRkug4AqLOM9_3uuvuUvkZ_uDnnzaYoAUCgnxc'); background-size: cover; background-position: center;">
+            </div>
+          </div>
+          <div class="p-8">
+            <div class="flex justify-between items-start mb-3">
+              <h3 class="text-xl font-bold text-brand-dark font-display">Mobile Device Y</h3>
+              <span class="bg-brand-primary/10 text-brand-primary font-bold px-3 py-1 rounded-lg">$450</span>
+            </div>
+            <p class="text-slate-500 mb-6 line-clamp-2 text-sm">Unlocked 128GB model. Space Grey. Includes fast charger
+              and protective case.</p>
+            <button
+              class="w-full h-12 rounded-xl bg-slate-50 hover:bg-brand-primary hover:text-white text-brand-dark text-sm font-bold transition-all flex items-center justify-center gap-2 font-display group-hover:shadow-lg group-hover:shadow-brand-primary/20">View
+              Details</button>
+          </div>
+        </div>
+        <div
+          class="product-card group relative bg-white rounded-3xl overflow-hidden border border-slate-100 transition-all duration-300 soft-shadow hover:-translate-y-2">
+          <div class="aspect-video w-full overflow-hidden bg-slate-100 relative">
+            <div
+              class="absolute top-4 right-4 z-10 bg-white/90 backdrop-blur-sm shadow-sm text-brand-dark text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
+              <span class="material-symbols-outlined text-sm text-orange-400">diamond</span> RARE
+            </div>
+            <div
+              class="w-full h-full bg-slate-200 flex items-center justify-center group-hover:scale-105 transition-transform duration-500"
+              style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAu8HGFar7V_MeygHy-YaRLPeRpOvyciQ_5Dew0R4ZYNi--8WYBV8gXmd8aYvMTw3NTPTT7H3UwtNsoc7OOPST2L5220PgcE9lpGsS884FuNNNMXj5UOqcpoxZWgqcJZwzAR2prMRDToz9_5iZw8lM1BV9ApBcP6GA7N1C_DmMOhGIwNQ6fpDTSBr-adRiqk7n4_VpLjGQWvGrcW5QgzGVA1OV0v7uxzDjA91MLnSqSt-kzd9-3qiK55bZt9vylZuTd8nMH7anIs_Y'); background-size: cover; background-position: center;">
+            </div>
+          </div>
+          <div class="p-8">
+            <div class="flex justify-between items-start mb-3">
+              <h3 class="text-xl font-bold text-brand-dark font-display">Mech Keyboard</h3>
+              <span class="bg-brand-primary/10 text-brand-primary font-bold px-3 py-1 rounded-lg">$120</span>
+            </div>
+            <p class="text-slate-500 mb-6 line-clamp-2 text-sm">Custom built 60% layout. Cherry MX Red switches. PBT
+              keycaps. RGB backlight.</p>
+            <button
+              class="w-full h-12 rounded-xl bg-slate-50 hover:bg-brand-primary hover:text-white text-brand-dark text-sm font-bold transition-all flex items-center justify-center gap-2 font-display group-hover:shadow-lg group-hover:shadow-brand-primary/20">View
+              Details</button>
+          </div>
+        </div>
+        <div
+          class="product-card group relative bg-white rounded-3xl overflow-hidden border border-slate-100 transition-all duration-300 soft-shadow hover:-translate-y-2">
+          <div class="aspect-video w-full overflow-hidden bg-slate-100 relative">
+            <div
+              class="w-full h-full bg-slate-200 flex items-center justify-center group-hover:scale-105 transition-transform duration-500"
+              style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAc0nTPRj8EQRl7m9xJb-wHo_zysVerrumA6Gtc58EweEZ6WuUKPsQqhNprnaeKUjpVNXcBMntGtD2rW0GXZ-b7mbly4wHYvCRhCfiNX17alwN4O7Wt26lKKbtqgxXT7VBt3nILM6mOA9S5dqZiVWqzIVaqTXmW6K87osxXTMmIDErdi_hDpIkDE-CbGdC4GMpiooCxnlv42qmwULMhlXUDM2zXABpxi5fwSnBAXP11cU_g6Q7sp8QWXBXMvMz9cAQtT4al7B7-xXs'); background-size: cover; background-position: center;">
+            </div>
+          </div>
+          <div class="p-8">
+            <div class="flex justify-between items-start mb-3">
+              <h3 class="text-xl font-bold text-brand-dark font-display">UltraWide Monitor</h3>
+              <span class="bg-brand-primary/10 text-brand-primary font-bold px-3 py-1 rounded-lg">$340</span>
+            </div>
+            <p class="text-slate-500 mb-6 line-clamp-2 text-sm">34-inch curved display. 144Hz refresh rate. Perfect for
+              gaming or productivity.</p>
+            <button
+              class="w-full h-12 rounded-xl bg-slate-50 hover:bg-brand-primary hover:text-white text-brand-dark text-sm font-bold transition-all flex items-center justify-center gap-2 font-display group-hover:shadow-lg group-hover:shadow-brand-primary/20">View
+              Details</button>
+          </div>
+        </div>
+      </div>
+      <div class="mt-16 text-center">
+        <button
+          class="text-slate-400 hover:text-brand-primary font-bold transition-colors text-sm flex items-center justify-center gap-1 mx-auto">
+          View Archive
+          <span class="material-symbols-outlined text-sm">arrow_forward</span>
+        </button>
+      </div>
+    </div>
+  </section>
+  <section class="py-20 relative" id="contact">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div
+        class="relative overflow-hidden rounded-[3rem] bg-white border border-slate-100 p-8 md:p-12 text-center soft-shadow">
+        <div
+          class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-brand-primary/5 to-transparent pointer-events-none">
+        </div>
+        <div class="relative z-10 flex flex-col items-center">
+          <div
+            class="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-primary/10 text-brand-primary">
+            <span class="material-symbols-outlined text-3xl">mail</span>
+          </div>
+          <h2 class="text-3xl font-bold text-brand-dark mb-3 font-display">Ready to Buy?</h2>
+          <p class="text-slate-500 text-lg mb-10 max-w-md mx-auto">Send me a message to reserve an item or ask any
+            questions.</p>
+          <div class="w-full max-w-lg mb-10">
+            <div id="emailCopyBtn"
+              class="group relative flex flex-col md:flex-row items-center justify-center gap-3 bg-slate-50 border border-slate-200 rounded-2xl p-6 hover:border-brand-primary/30 hover:shadow-md transition-all cursor-pointer">
+              <span class="material-symbols-outlined text-slate-400 group-hover:text-brand-primary">email</span>
+              <span
+                class="text-lg md:text-xl font-bold text-brand-dark font-body break-all">wesleyleeroy06@gmail.com</span>
+              <div
+                class="md:ml-auto bg-white px-3 py-1 rounded-lg text-xs font-bold text-slate-400 shadow-sm group-hover:text-brand-primary">
+                COPY</div>
+            </div>
+            <p class="mt-4 text-sm text-slate-400 flex items-center justify-center gap-1">
+              <span class="material-symbols-outlined text-sm">schedule</span>
+              I usually reply within 24 hours.
+            </p>
+          </div>
+          <div class="w-full border-t border-slate-100 my-8"></div>
+          <h3 class="text-sm font-bold text-slate-400 mb-6 uppercase tracking-wider font-display">Accepted Payment
+            Methods</h3>
+          <div class="flex flex-wrap justify-center gap-4">
+            <div
+              class="flex items-center gap-2 px-6 py-3 rounded-full bg-blue-50/50 border border-blue-100 hover:bg-blue-50 transition-colors">
+              <span class="material-symbols-outlined text-blue-600">payments</span>
+              <span class="text-sm font-bold text-blue-900">PayPal</span>
+            </div>
+            <div
+              class="flex items-center gap-2 px-6 py-3 rounded-full bg-purple-50/50 border border-purple-100 hover:bg-purple-50 transition-colors">
+              <span class="material-symbols-outlined text-purple-600">account_balance_wallet</span>
+              <span class="text-sm font-bold text-purple-900">Zelle</span>
+            </div>
+            <div
+              class="flex items-center gap-2 px-6 py-3 rounded-full bg-green-50/50 border border-green-100 hover:bg-green-50 transition-colors">
+              <span class="material-symbols-outlined text-green-600">attach_money</span>
+              <span class="text-sm font-bold text-green-900">Cash App</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </section>
 
-<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-<div class="mb-8 flex justify-center">
-<div class="w-full max-w-4xl rounded-3xl overflow-hidden shadow-lg border border-slate-200">
-<video class="w-full" autoplay loop muted playsinline disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback">
-<source src="cards-video.mov" type="video/quicktime">
-<source src="cards-video.mov" type="video/mp4">
-Your browser does not support the video tag.
-</video>
-</div>
-</div>
-<div class="mt-8 mb-8 flex justify-end">
-<div class="w-full max-w-2xl overflow-hidden shadow-lg">
-<div class="upenn-image-wrapper overflow-hidden relative" style="height: 550px;">
-    <img id="upenn-image" src="upenn.webp" alt="UPenn" class="absolute left-0 w-full object-cover" style="height: 160%; top: -20%; will-change: transform;">
-</div>
-</div>
-</div>
-<div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-<div>
-<h2 class="text-3xl font-bold text-brand-dark tracking-tight flex items-center gap-3 font-display inventory-title">
-<span class="bg-brand-soft/20 text-brand-accent p-2 rounded-xl material-symbols-outlined">inventory_2</span>
-Available Items
-</h2>
-<p class="text-slate-500 mt-2 font-medium inventory-subtitle">Freshly stocked and ready for a new home.</p>
-</div>
-<div class="flex items-center gap-2 text-sm text-brand-dark bg-white px-4 py-2 rounded-full border border-slate-100 shadow-sm inventory-badge">
-<span class="material-symbols-outlined text-brand-primary text-lg">verified</span>
-Verified Seller
-</div>
-</div>
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 products-grid">
-<div class="product-card group relative bg-white rounded-3xl overflow-hidden border border-slate-100 transition-all duration-300 soft-shadow hover:-translate-y-2">
-<div class="aspect-video w-full overflow-hidden bg-slate-100 relative">
-<div class="absolute top-4 right-4 z-10 bg-white/90 backdrop-blur-sm shadow-sm text-brand-dark text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
-<span class="material-symbols-outlined text-sm text-brand-primary">star</span> MINT
-</div>
-<div class="w-full h-full bg-slate-200 flex items-center justify-center group-hover:scale-105 transition-transform duration-500" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDLK7m-BCFzm1eDND9jqA0SNNPEwgvAB9awC6dpyW5tOZGsIua1i55o7RlYSuK3me1_NSOlHRrl85K6q75hmI5JOudX-Qu8YU0tZhvmjLQsd_q2cvZmE0WqtyManZSFINl8aabEsUY_wNDmuyZPcI8lBpSP4f1PlpVxA9aeAVAZCOKMu7olorwoPHyvCNJtwMlaXQKsh7L_Lm3OGwC-Tzw5THxgCdu_m6ixmVzylafX7H3PyEIyugFhA-BDczSN47IUm6ScJRZj1oc'); background-size: cover; background-position: center;"></div>
-</div>
-<div class="p-8">
-<div class="flex justify-between items-start mb-3">
-<h3 class="text-xl font-bold text-brand-dark font-display">Retro Console X</h3>
-<span class="bg-brand-primary/10 text-brand-primary font-bold px-3 py-1 rounded-lg">$150</span>
-</div>
-<p class="text-slate-500 mb-6 line-clamp-2 text-sm">Vintage gaming system with original controllers and 5 game cartridges. Fully restored circuitry.</p>
-<button class="w-full h-12 rounded-xl bg-slate-50 hover:bg-brand-primary hover:text-white text-brand-dark text-sm font-bold transition-all flex items-center justify-center gap-2 font-display group-hover:shadow-lg group-hover:shadow-brand-primary/20">View Details</button>
-</div>
-</div>
-<div class="product-card group relative bg-white rounded-3xl overflow-hidden border border-slate-100 transition-all duration-300 soft-shadow hover:-translate-y-2">
-<div class="aspect-video w-full overflow-hidden bg-slate-100 relative">
-<div class="absolute top-4 right-4 z-10 bg-white/90 backdrop-blur-sm shadow-sm text-brand-dark text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
-<span class="material-symbols-outlined text-sm text-brand-accent">key</span> DIGITAL
-</div>
-<div class="w-full h-full bg-slate-200 flex items-center justify-center group-hover:scale-105 transition-transform duration-500" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA7RCGtuC2rbhINKtkvdLDwyd8wSLTaUywNhwnPZUCfJ4suirezca1zas2V_mTnmFTd8A1gV7kk0oSkSJQxfkMzsMtChbygzrz4brmJ6FG1R0_h0ozB5r-bF0ADSepNf8LKxN9Ap6Fsc52Mn_bn5iiuMh_imJ1gdRm-NWrvPB2S_yZe-SS7M2jovnfA28ET1Zyy6E1ktDMyHLFRfvcoGeO3UI6kLQpRljb0BR8S8cCanX34y04TwRzJU_vBfq2zX1yQSr3ogSe9pV0'); background-size: cover; background-position: center;"></div>
-</div>
-<div class="p-8">
-<div class="flex justify-between items-start mb-3">
-<h3 class="text-xl font-bold text-brand-dark font-display">Pro Audio Suite</h3>
-<span class="bg-brand-primary/10 text-brand-primary font-bold px-3 py-1 rounded-lg">$90</span>
-</div>
-<p class="text-slate-500 mb-6 line-clamp-2 text-sm">Lifetime license for top-tier audio production software. Includes all future plugin updates.</p>
-<button class="w-full h-12 rounded-xl bg-slate-50 hover:bg-brand-primary hover:text-white text-brand-dark text-sm font-bold transition-all flex items-center justify-center gap-2 font-display group-hover:shadow-lg group-hover:shadow-brand-primary/20">View Details</button>
-</div>
-</div>
-<div class="product-card group relative bg-white rounded-3xl overflow-hidden border border-slate-100 transition-all duration-300 soft-shadow hover:-translate-y-2">
-<div class="aspect-video w-full overflow-hidden bg-slate-100 relative">
-<div class="w-full h-full bg-slate-200 flex items-center justify-center group-hover:scale-105 transition-transform duration-500" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDjWAm9bA7FzMoZjoOg963WGdEFSHnmXabzSeTxd1Zy9rQfLNuNdxA02tcvi6mZYcuyt0sub2Ke99LECFBiWOzsCp3G_QFd-Ok5CnhQ79DwlmuIiJzlOlawEQo1GNitVgq1kC35h8g21uRkMqo5UYTDSUuasgnHyXZRmxixLZGMcQppj4pueV4BjIZtD1cAU_DOtTf_aMgpM3dvpuk9Vq-1pFw1cZ-LrgBNHziVJLmTNwwTQQ0M9LY7vpyHVrsiZLZQyH0MJPBARfQ'); background-size: cover; background-position: center;"></div>
-</div>
-<div class="p-8">
-<div class="flex justify-between items-start mb-3">
-<h3 class="text-xl font-bold text-brand-dark font-display">Limited Sneakers</h3>
-<span class="bg-brand-primary/10 text-brand-primary font-bold px-3 py-1 rounded-lg">$220</span>
-</div>
-<p class="text-slate-500 mb-6 line-clamp-2 text-sm">Size 10 US. Never worn. Original box and verification tags included. Collector's item.</p>
-<button class="w-full h-12 rounded-xl bg-slate-50 hover:bg-brand-primary hover:text-white text-brand-dark text-sm font-bold transition-all flex items-center justify-center gap-2 font-display group-hover:shadow-lg group-hover:shadow-brand-primary/20">View Details</button>
-</div>
-</div>
-<div class="product-card group relative bg-white rounded-3xl overflow-hidden border border-slate-100 transition-all duration-300 soft-shadow hover:-translate-y-2">
-<div class="aspect-video w-full overflow-hidden bg-slate-100 relative">
-<div class="w-full h-full bg-slate-200 flex items-center justify-center group-hover:scale-105 transition-transform duration-500" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDgs57_6f4iDEN-W9JRxfuXEMCObnHiD_YOl4x5h6Y3y-ohyyjIanmGuPZdi5R1TJGzOjCS-C7SiRDdUr1CZvQLE6Uu2aA7nfR4ZDOIhi6PmTNqW-8c3R9GDFJt2UKdAfuZAmifsIfZaVuLE_TSR1D3dtjmCVrldi8b0eJSLy-MmWShzpmgS1Gh-kECDMeMguhkqiKLsX4I9DHeJUGgADLCYeufnCEfORVdYKJUobRkug4AqLOM9_3uuvuUvkZ_uDnnzaYoAUCgnxc'); background-size: cover; background-position: center;"></div>
-</div>
-<div class="p-8">
-<div class="flex justify-between items-start mb-3">
-<h3 class="text-xl font-bold text-brand-dark font-display">Mobile Device Y</h3>
-<span class="bg-brand-primary/10 text-brand-primary font-bold px-3 py-1 rounded-lg">$450</span>
-</div>
-<p class="text-slate-500 mb-6 line-clamp-2 text-sm">Unlocked 128GB model. Space Grey. Includes fast charger and protective case.</p>
-<button class="w-full h-12 rounded-xl bg-slate-50 hover:bg-brand-primary hover:text-white text-brand-dark text-sm font-bold transition-all flex items-center justify-center gap-2 font-display group-hover:shadow-lg group-hover:shadow-brand-primary/20">View Details</button>
-</div>
-</div>
-<div class="product-card group relative bg-white rounded-3xl overflow-hidden border border-slate-100 transition-all duration-300 soft-shadow hover:-translate-y-2">
-<div class="aspect-video w-full overflow-hidden bg-slate-100 relative">
-<div class="absolute top-4 right-4 z-10 bg-white/90 backdrop-blur-sm shadow-sm text-brand-dark text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
-<span class="material-symbols-outlined text-sm text-orange-400">diamond</span> RARE
-</div>
-<div class="w-full h-full bg-slate-200 flex items-center justify-center group-hover:scale-105 transition-transform duration-500" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAu8HGFar7V_MeygHy-YaRLPeRpOvyciQ_5Dew0R4ZYNi--8WYBV8gXmd8aYvMTw3NTPTT7H3UwtNsoc7OOPST2L5220PgcE9lpGsS884FuNNNMXj5UOqcpoxZWgqcJZwzAR2prMRDToz9_5iZw8lM1BV9ApBcP6GA7N1C_DmMOhGIwNQ6fpDTSBr-adRiqk7n4_VpLjGQWvGrcW5QgzGVA1OV0v7uxzDjA91MLnSqSt-kzd9-3qiK55bZt9vylZuTd8nMH7anIs_Y'); background-size: cover; background-position: center;"></div>
-</div>
-<div class="p-8">
-<div class="flex justify-between items-start mb-3">
-<h3 class="text-xl font-bold text-brand-dark font-display">Mech Keyboard</h3>
-<span class="bg-brand-primary/10 text-brand-primary font-bold px-3 py-1 rounded-lg">$120</span>
-</div>
-<p class="text-slate-500 mb-6 line-clamp-2 text-sm">Custom built 60% layout. Cherry MX Red switches. PBT keycaps. RGB backlight.</p>
-<button class="w-full h-12 rounded-xl bg-slate-50 hover:bg-brand-primary hover:text-white text-brand-dark text-sm font-bold transition-all flex items-center justify-center gap-2 font-display group-hover:shadow-lg group-hover:shadow-brand-primary/20">View Details</button>
-</div>
-</div>
-<div class="product-card group relative bg-white rounded-3xl overflow-hidden border border-slate-100 transition-all duration-300 soft-shadow hover:-translate-y-2">
-<div class="aspect-video w-full overflow-hidden bg-slate-100 relative">
-<div class="w-full h-full bg-slate-200 flex items-center justify-center group-hover:scale-105 transition-transform duration-500" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAc0nTPRj8EQRl7m9xJb-wHo_zysVerrumA6Gtc58EweEZ6WuUKPsQqhNprnaeKUjpVNXcBMntGtD2rW0GXZ-b7mbly4wHYvCRhCfiNX17alwN4O7Wt26lKKbtqgxXT7VBt3nILM6mOA9S5dqZiVWqzIVaqTXmW6K87osxXTMmIDErdi_hDpIkDE-CbGdC4GMpiooCxnlv42qmwULMhlXUDM2zXABpxi5fwSnBAXP11cU_g6Q7sp8QWXBXMvMz9cAQtT4al7B7-xXs'); background-size: cover; background-position: center;"></div>
-</div>
-<div class="p-8">
-<div class="flex justify-between items-start mb-3">
-<h3 class="text-xl font-bold text-brand-dark font-display">UltraWide Monitor</h3>
-<span class="bg-brand-primary/10 text-brand-primary font-bold px-3 py-1 rounded-lg">$340</span>
-</div>
-<p class="text-slate-500 mb-6 line-clamp-2 text-sm">34-inch curved display. 144Hz refresh rate. Perfect for gaming or productivity.</p>
-<button class="w-full h-12 rounded-xl bg-slate-50 hover:bg-brand-primary hover:text-white text-brand-dark text-sm font-bold transition-all flex items-center justify-center gap-2 font-display group-hover:shadow-lg group-hover:shadow-brand-primary/20">View Details</button>
-</div>
-</div>
-</div>
-<div class="mt-16 text-center">
-<button class="text-slate-400 hover:text-brand-primary font-bold transition-colors text-sm flex items-center justify-center gap-1 mx-auto">
-View Archive
-<span class="material-symbols-outlined text-sm">arrow_forward</span>
-</button>
-</div>
-</div>
-</section>
-<section class="py-20 relative" id="contact">
-<div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-<div class="relative overflow-hidden rounded-[3rem] bg-white border border-slate-100 p-8 md:p-12 text-center soft-shadow">
-<div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-brand-primary/5 to-transparent pointer-events-none"></div>
-<div class="relative z-10 flex flex-col items-center">
-<div class="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-primary/10 text-brand-primary">
-<span class="material-symbols-outlined text-3xl">mail</span>
-</div>
-<h2 class="text-3xl font-bold text-brand-dark mb-3 font-display">Ready to Buy?</h2>
-<p class="text-slate-500 text-lg mb-10 max-w-md mx-auto">Send me a message to reserve an item or ask any questions.</p>
-<div class="w-full max-w-lg mb-10">
-<div id="emailCopyBtn" class="group relative flex flex-col md:flex-row items-center justify-center gap-3 bg-slate-50 border border-slate-200 rounded-2xl p-6 hover:border-brand-primary/30 hover:shadow-md transition-all cursor-pointer">
-<span class="material-symbols-outlined text-slate-400 group-hover:text-brand-primary">email</span>
-<span class="text-lg md:text-xl font-bold text-brand-dark font-body break-all">wesleyleeroy06@gmail.com</span>
-<div class="md:ml-auto bg-white px-3 py-1 rounded-lg text-xs font-bold text-slate-400 shadow-sm group-hover:text-brand-primary">COPY</div>
-</div>
-<p class="mt-4 text-sm text-slate-400 flex items-center justify-center gap-1">
-<span class="material-symbols-outlined text-sm">schedule</span>
-                        I usually reply within 24 hours.
-                    </p>
-</div>
-<div class="w-full border-t border-slate-100 my-8"></div>
-<h3 class="text-sm font-bold text-slate-400 mb-6 uppercase tracking-wider font-display">Accepted Payment Methods</h3>
-<div class="flex flex-wrap justify-center gap-4">
-<div class="flex items-center gap-2 px-6 py-3 rounded-full bg-blue-50/50 border border-blue-100 hover:bg-blue-50 transition-colors">
-<span class="material-symbols-outlined text-blue-600">payments</span>
-<span class="text-sm font-bold text-blue-900">PayPal</span>
-</div>
-<div class="flex items-center gap-2 px-6 py-3 rounded-full bg-purple-50/50 border border-purple-100 hover:bg-purple-50 transition-colors">
-<span class="material-symbols-outlined text-purple-600">account_balance_wallet</span>
-<span class="text-sm font-bold text-purple-900">Zelle</span>
-</div>
-<div class="flex items-center gap-2 px-6 py-3 rounded-full bg-green-50/50 border border-green-100 hover:bg-green-50 transition-colors">
-<span class="material-symbols-outlined text-green-600">attach_money</span>
-<span class="text-sm font-bold text-green-900">Cash App</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<footer class="border-t border-slate-200 bg-white py-12">
-<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
-<div class="text-center md:text-left">
-<p class="text-brand-dark font-bold text-lg font-display mb-1">Wesley's Items</p>
-<p class="text-slate-400 text-sm">© 2026. Happy Shopping!</p>
-</div>
-<div class="flex items-center gap-6">
-<a class="text-slate-400 hover:text-brand-primary transition-colors bg-slate-50 p-2 rounded-full" href="https://www.instagram.com/wesleyleeroy/" target="_blank" rel="noopener noreferrer">
-<span class="sr-only">Instagram</span>
-<svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-<path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
-</svg>
-</a>
-<a class="text-slate-400 hover:text-brand-primary transition-colors bg-slate-50 p-2 rounded-full" href="#">
-<span class="sr-only">GitHub</span>
-<svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-<path clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" fill-rule="evenodd"></path>
-</svg>
-</a>
-</div>
-<div class="flex items-center gap-2 px-3 py-1 rounded-full bg-green-50 border border-green-100">
-<div class="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
-<span class="text-xs text-green-700 font-bold">Shop Open</span>
-</div>
-</div>
-</footer>
-<script>
-// Security: Email copy functionality with XSS protection
-// Input sanitization: Email is hardcoded (trusted source), no user input accepted
-// DOM manipulation uses textContent (not innerHTML) to prevent XSS injection
-document.getElementById('emailCopyBtn').addEventListener('click', function() {
-    // Security: Email is a constant, not derived from user input
-    const email = 'wesleyleeroy06@gmail.com';
-    const copyBtn = this.querySelector('div');
-    const originalText = copyBtn.textContent;
+  <footer class="relative py-12 overflow-hidden bg-transparent">
 
-    // Security: Using Clipboard API which sanitizes copied content
-    navigator.clipboard.writeText(email).then(function() {
+    <div class="absolute inset-0 z-0 w-full h-full pointer-events-none opacity-100">
+      <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.32/build/spline-viewer.js"></script>
+      <spline-viewer url="https://prod.spline.design/ijzSSl18B0sLGe4Y/scene.splinecode"
+        style="width: 100%; height: 100%; display: block;">
+      </spline-viewer>
+    </div>
+
+    <div
+      class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+
+      <div class="text-center md:text-left">
+        <p class="text-brand-dark font-bold text-lg font-display mb-1">Wesley's Items</p>
+        <p class="text-slate-400 text-sm">© 2026. Happy Shopping!</p>
+      </div>
+
+      <div class="flex items-center gap-6">
+        <a class="text-slate-400 hover:text-brand-primary transition-colors bg-slate-50 p-2 rounded-full"
+          href="https://www.instagram.com/wesleyleeroy/" target="_blank" rel="noopener noreferrer">
+          <span class="sr-only">Instagram</span>
+          <svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+          </svg>
+        </a>
+        <a class="text-slate-400 hover:text-brand-primary transition-colors bg-slate-50 p-2 rounded-full" href="#">
+          <span class="sr-only">GitHub</span>
+          <svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+            <path clip-rule="evenodd"
+              d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+              fill-rule="evenodd"></path>
+          </svg>
+        </a>
+      </div>
+
+      <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-green-50 border border-green-100">
+        <div class="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
+        <span class="text-xs text-green-700 font-bold">Shop Open</span>
+      </div>
+
+    </div>
+  </footer>
+  <script>
+    // Security: Email copy functionality with XSS protection
+    // Input sanitization: Email is hardcoded (trusted source), no user input accepted
+    // DOM manipulation uses textContent (not innerHTML) to prevent XSS injection
+    document.getElementById('emailCopyBtn').addEventListener('click', function () {
+      // Security: Email is a constant, not derived from user input
+      const email = 'wesleyleeroy06@gmail.com';
+      const copyBtn = this.querySelector('div');
+      const originalText = copyBtn.textContent;
+
+      // Security: Using Clipboard API which sanitizes copied content
+      navigator.clipboard.writeText(email).then(function () {
         // Security: textContent prevents XSS (safe assignment, no HTML parsing)
         copyBtn.textContent = 'COPIED!';
         copyBtn.classList.add('text-brand-primary');
 
-        setTimeout(function() {
-            copyBtn.textContent = originalText;
-            copyBtn.classList.remove('text-brand-primary');
+        setTimeout(function () {
+          copyBtn.textContent = originalText;
+          copyBtn.classList.remove('text-brand-primary');
         }, 2000);
-    }).catch(function(err) {
+      }).catch(function (err) {
         // Security: Error logging without exposing sensitive information
         console.error('Failed to copy email:', err);
         copyBtn.textContent = 'FAILED';
 
-        setTimeout(function() {
-            copyBtn.textContent = originalText;
+        setTimeout(function () {
+          copyBtn.textContent = originalText;
         }, 2000);
+      });
     });
-});
-</script>
+  </script>
 
-<script>
-// ==========================================
-// GSAP Animations with Spring Physics
-// ==========================================
-// Spring configuration: stiffness: 100, damping: 20
-// Security: All animations use GSAP library loaded with SRI integrity checks
-// Security: No user input is processed in animations (all values are hardcoded)
-// Security: DOM queries use getElementById/querySelector with trusted selectors only
-gsap.registerPlugin(ScrollTrigger);
+  <script>
+    // ==========================================
+    // GSAP Animations with Spring Physics
+    // ==========================================
+    // Spring configuration: stiffness: 100, damping: 20
+    // Security: All animations use GSAP library loaded with SRI integrity checks
+    // Security: No user input is processed in animations (all values are hardcoded)
+    // Security: DOM queries use getElementById/querySelector with trusted selectors only
+    gsap.registerPlugin(ScrollTrigger);
 
-// Convert spring physics to GSAP ease
-// stiffness: 100, damping: 20 approximates to elastic.out with specific params
-const springEase = "elastic.out(1, 0.5)";
+    // Convert spring physics to GSAP ease
+    // stiffness: 100, damping: 20 approximates to elastic.out with specific params
+    const springEase = "elastic.out(1, 0.5)";
 
-// Feature cards - no animations, just display normally with sticky positioning
-const featureCards = gsap.utils.toArray('.feature-card');
+    // Feature cards - no animations, just display normally with sticky positioning
+    const featureCards = gsap.utils.toArray('.feature-card');
 
-featureCards.forEach((card, index) => {
-  const isLast = index === featureCards.length - 1;
+    featureCards.forEach((card, index) => {
+      const isLast = index === featureCards.length - 1;
 
-  ScrollTrigger.create({
-    trigger: card,
-    start: 'top 100px',
-    end: isLast ? 'bottom 100px' : 'bottom top',
-    pin: true,
-    pinSpacing: false
-  });
-});
+      ScrollTrigger.create({
+        trigger: card,
+        start: 'top 100px',
+        end: isLast ? 'bottom 100px' : 'bottom top',
+        pin: true,
+        pinSpacing: false
+      });
+    });
 
-// Product Cards Animation with Spring Physics
-const productCards = gsap.utils.toArray('.product-card');
+    // Product Cards Animation with Spring Physics
+    const productCards = gsap.utils.toArray('.product-card');
 
-// Animate each card individually with spring physics
-productCards.forEach((card, index) => {
-  gsap.from(card, {
-    scrollTrigger: {
-      trigger: card,
-      start: 'top 80%',
-      end: 'bottom 20%',
-      toggleActions: 'play reverse play reverse'
-    },
-    opacity: 0,
-    y: 40,
-    scale: 0.95,
-    duration: 0.8,
-    delay: index * 0.1,
-    ease: springEase
-  });
-});
+    // Animate each card individually with spring physics
+    productCards.forEach((card, index) => {
+      gsap.from(card, {
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 80%',
+          end: 'bottom 20%',
+          toggleActions: 'play reverse play reverse'
+        },
+        opacity: 0,
+        y: 40,
+        scale: 0.95,
+        duration: 0.8,
+        delay: index * 0.1,
+        ease: springEase
+      });
+    });
 
-// Inventory section title animation - play once and stay visible
-gsap.from('.inventory-title', {
-  scrollTrigger: {
-    trigger: '.inventory-title',
-    start: 'top 80%',
-    toggleActions: 'play none none none'
-  },
-  opacity: 0,
-  y: 20,
-  duration: 0.8,
-  ease: springEase
-});
-
-gsap.from('.inventory-subtitle', {
-  scrollTrigger: {
-    trigger: '.inventory-subtitle',
-    start: 'top 80%',
-    toggleActions: 'play none none none'
-  },
-  opacity: 0,
-  y: 20,
-  duration: 0.8,
-  delay: 0.1,
-  ease: springEase
-});
-
-gsap.from('.inventory-badge', {
-  scrollTrigger: {
-    trigger: '.inventory-badge',
-    start: 'top 80%',
-    toggleActions: 'play none none none'
-  },
-  opacity: 0,
-  scale: 0.9,
-  duration: 0.8,
-  delay: 0.15,
-  ease: springEase
-});
-
-// Product card hover animations with spring physics
-productCards.forEach((card) => {
-  card.addEventListener('mouseenter', () => {
-    gsap.to(card, {
-      y: -12,
-      scale: 1.02,
-      duration: 0.6,
+    // Inventory section title animation - play once and stay visible
+    gsap.from('.inventory-title', {
+      scrollTrigger: {
+        trigger: '.inventory-title',
+        start: 'top 80%',
+        toggleActions: 'play none none none'
+      },
+      opacity: 0,
+      y: 20,
+      duration: 0.8,
       ease: springEase
     });
-  });
 
-  card.addEventListener('mouseleave', () => {
-    gsap.to(card, {
-      y: 0,
-      scale: 1,
-      duration: 0.6,
+    gsap.from('.inventory-subtitle', {
+      scrollTrigger: {
+        trigger: '.inventory-subtitle',
+        start: 'top 80%',
+        toggleActions: 'play none none none'
+      },
+      opacity: 0,
+      y: 20,
+      duration: 0.8,
+      delay: 0.1,
       ease: springEase
     });
-  });
-});
 
-// ==========================================
-// ELEMENTIS-INSPIRED SCROLL ANIMATIONS
-// ==========================================
-
-// Elementis easing
-const elementisEase = "cubic-bezier(.24, .43, .15, .97)";
-
-// Text reveal animations with masking effect
-gsap.utils.toArray('.text-reveal').forEach((text, index) => {
-  gsap.to(text, {
-    scrollTrigger: {
-      trigger: text,
-      start: 'top 85%',
-      toggleActions: 'play none none none'
-    },
-    y: 0,
-    opacity: 1,
-    duration: 0.6,
-    delay: index * 0.08,
-    ease: elementisEase,
-    // NEW: Remove the mask after animation so the 'y' tail is never cut off
-    onComplete: () => {
-        text.parentElement.style.overflow = 'visible';
-    }
-  });
-});
-
-// Image clip-path reveals
-gsap.utils.toArray('.img-reveal').forEach((img) => {
-  gsap.to(img, {
-    scrollTrigger: {
-      trigger: img,
-      start: 'top 80%',
-      toggleActions: 'play none none none'
-    },
-    clipPath: 'inset(0% 0 0 0)',
-    opacity: 1,
-    duration: 1.5,
-    ease: elementisEase
-  });
-});
-
-// Fade up animations
-gsap.utils.toArray('.fade-up').forEach((element, index) => {
-  gsap.to(element, {
-    scrollTrigger: {
-      trigger: element,
-      start: 'top 85%',
-      toggleActions: 'play none none none'
-    },
-    y: 0,
-    opacity: 1,
-    duration: 0.6,
-    delay: 0,
-    ease: "linear"
-  });
-});
-
-// Scale fade animations
-gsap.utils.toArray('.scale-fade').forEach((element) => {
-  gsap.to(element, {
-    scrollTrigger: {
-      trigger: element,
-      start: 'top 85%',
-      toggleActions: 'play none none none'
-    },
-    scale: 1,
-    opacity: 1,
-    duration: 0.8,
-    ease: elementisEase
-  });
-});
-
-// Parallax background effect with scroll scrubbing
-gsap.to('#hero-bg', {
-  scrollTrigger: {
-    trigger: '#hero',
-    start: 'top top',
-    end: 'bottom top',
-    scrub: 1.5
-  },
-  y: '30%',
-  scale: 1.15,
-  ease: 'none'
-});
-
-// Feature section titles with stagger - repeats on scroll
-gsap.from('.feature-title', {
-  scrollTrigger: {
-    trigger: '.feature-title',
-    start: 'top 80%',
-    end: 'bottom 20%',
-    toggleActions: 'play reverse play reverse'
-  },
-  y: 40,
-  opacity: 0,
-  scale: 0.95,
-  duration: 1,
-  ease: elementisEase
-});
-
-gsap.from('.feature-subtitle', {
-  scrollTrigger: {
-    trigger: '.feature-subtitle',
-    start: 'top 80%',
-    end: 'bottom 20%',
-    toggleActions: 'play reverse play reverse'
-  },
-  y: 20,
-  opacity: 0,
-  duration: 0.8,
-  delay: 0.2,
-  ease: elementisEase
-});
-
-// Shining polish effect on all buttons with spark particles
-const shineButtons = document.querySelectorAll('.shine-button');
-shineButtons.forEach(btn => {
-  let sparkParticles = [];
-
-  // Create spark particles
-  for (let i = 0; i < 12; i++) {
-    const spark = document.createElement('div');
-    spark.className = 'spark-particle';
-    btn.appendChild(spark);
-    sparkParticles.push(spark);
-  }
-
-  btn.addEventListener('mousemove', (e) => {
-    const rect = btn.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    btn.style.setProperty('--shine-x', `${x}px`);
-    btn.style.setProperty('--shine-y', `${y}px`);
-
-    // Animate spark particles
-    sparkParticles.forEach((spark, index) => {
-      const angle = (index / sparkParticles.length) * Math.PI * 2;
-      const distance = 20 + Math.random() * 30;
-      const offsetX = Math.cos(angle) * distance;
-      const offsetY = Math.sin(angle) * distance;
-
-      spark.style.left = `${x + offsetX}px`;
-      spark.style.top = `${y + offsetY}px`;
-      spark.style.transform = `rotate(${angle * (180 / Math.PI)}deg)`;
-      spark.style.opacity = '0.8';
-
-      // Fade out particles
-      setTimeout(() => {
-        spark.style.opacity = '0';
-      }, 50);
+    gsap.from('.inventory-badge', {
+      scrollTrigger: {
+        trigger: '.inventory-badge',
+        start: 'top 80%',
+        toggleActions: 'play none none none'
+      },
+      opacity: 0,
+      scale: 0.9,
+      duration: 0.8,
+      delay: 0.15,
+      ease: springEase
     });
-  });
 
-  btn.addEventListener('mouseleave', () => {
-    sparkParticles.forEach(spark => {
-      spark.style.opacity = '0';
+    // Product card hover animations with spring physics
+    productCards.forEach((card) => {
+      card.addEventListener('mouseenter', () => {
+        gsap.to(card, {
+          y: -12,
+          scale: 1.02,
+          duration: 0.6,
+          ease: springEase
+        });
+      });
+
+      card.addEventListener('mouseleave', () => {
+        gsap.to(card, {
+          y: 0,
+          scale: 1,
+          duration: 0.6,
+          ease: springEase
+        });
+      });
     });
-  });
-});
 
-// Hide/show navigation on scroll + marquee scroll effect
-let lastScrollTop = 0;
-const nav = document.querySelector('nav');
-const navHeight = nav.offsetHeight;
-const marquee = document.getElementById('marquee-scroll');
-let marqueeOffset = 0;
+    // ==========================================
+    // ELEMENTIS-INSPIRED SCROLL ANIMATIONS
+    // ==========================================
 
-// UPenn image parallax effect
-const upennImage = document.getElementById('upenn-image');
-const upennWrapper = document.querySelector('.upenn-image-wrapper');
+    // Elementis easing
+    const elementisEase = "cubic-bezier(.24, .43, .15, .97)";
 
-window.addEventListener('scroll', () => {
-  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-  const scrollDelta = scrollTop - lastScrollTop;
+    // Text reveal animations with masking effect
+    gsap.utils.toArray('.text-reveal').forEach((text, index) => {
+      gsap.to(text, {
+        scrollTrigger: {
+          trigger: text,
+          start: 'top 85%',
+          toggleActions: 'play none none none'
+        },
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        delay: index * 0.08,
+        ease: elementisEase,
+        // NEW: Remove the mask after animation so the 'y' tail is never cut off
+        onComplete: () => {
+          text.parentElement.style.overflow = 'visible';
+        }
+      });
+    });
 
-  if (scrollTop > lastScrollTop && scrollTop > navHeight) {
-    // Scrolling down & past nav height
-    nav.style.transform = 'translateY(-100%)';
-    nav.style.transition = 'transform 0.3s ease-in-out';
-  } else if (scrollTop < lastScrollTop) {
-    // Scrolling up
-    nav.style.transform = 'translateY(0)';
-    nav.style.transition = 'transform 0.3s ease-in-out';
-  }
+    // Image clip-path reveals
+    gsap.utils.toArray('.img-reveal').forEach((img) => {
+      gsap.to(img, {
+        scrollTrigger: {
+          trigger: img,
+          start: 'top 80%',
+          toggleActions: 'play none none none'
+        },
+        clipPath: 'inset(0% 0 0 0)',
+        opacity: 1,
+        duration: 1.5,
+        ease: elementisEase
+      });
+    });
 
-  // Marquee scroll effect: down = move left (negative), up = move right (positive)
-  marqueeOffset -= scrollDelta * 0.5; // Adjust multiplier for speed
-  marquee.style.transform = `translateX(${marqueeOffset}px)`;
+    // Fade up animations
+    gsap.utils.toArray('.fade-up').forEach((element, index) => {
+      gsap.to(element, {
+        scrollTrigger: {
+          trigger: element,
+          start: 'top 85%',
+          toggleActions: 'play none none none'
+        },
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        delay: 0,
+        ease: "linear"
+      });
+    });
 
-  // UPenn image parallax effect
-    if (upennWrapper && upennImage) {
+    // Scale fade animations
+    gsap.utils.toArray('.scale-fade').forEach((element) => {
+      gsap.to(element, {
+        scrollTrigger: {
+          trigger: element,
+          start: 'top 85%',
+          toggleActions: 'play none none none'
+        },
+        scale: 1,
+        opacity: 1,
+        duration: 0.8,
+        ease: elementisEase
+      });
+    });
+
+    // Parallax background effect with scroll scrubbing
+    gsap.to('#hero-bg', {
+      scrollTrigger: {
+        trigger: '#hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 1.5
+      },
+      y: '30%',
+      scale: 1.15,
+      ease: 'none'
+    });
+
+    // Feature section titles with stagger - repeats on scroll
+    gsap.from('.feature-title', {
+      scrollTrigger: {
+        trigger: '.feature-title',
+        start: 'top 80%',
+        end: 'bottom 20%',
+        toggleActions: 'play reverse play reverse'
+      },
+      y: 40,
+      opacity: 0,
+      scale: 0.95,
+      duration: 1,
+      ease: elementisEase
+    });
+
+    gsap.from('.feature-subtitle', {
+      scrollTrigger: {
+        trigger: '.feature-subtitle',
+        start: 'top 80%',
+        end: 'bottom 20%',
+        toggleActions: 'play reverse play reverse'
+      },
+      y: 20,
+      opacity: 0,
+      duration: 0.8,
+      delay: 0.2,
+      ease: elementisEase
+    });
+
+    // Shining polish effect on all buttons with spark particles
+    const shineButtons = document.querySelectorAll('.shine-button');
+    shineButtons.forEach(btn => {
+      let sparkParticles = [];
+
+      // Create spark particles
+      for (let i = 0; i < 12; i++) {
+        const spark = document.createElement('div');
+        spark.className = 'spark-particle';
+        btn.appendChild(spark);
+        sparkParticles.push(spark);
+      }
+
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        btn.style.setProperty('--shine-x', `${x}px`);
+        btn.style.setProperty('--shine-y', `${y}px`);
+
+        // Animate spark particles
+        sparkParticles.forEach((spark, index) => {
+          const angle = (index / sparkParticles.length) * Math.PI * 2;
+          const distance = 20 + Math.random() * 30;
+          const offsetX = Math.cos(angle) * distance;
+          const offsetY = Math.sin(angle) * distance;
+
+          spark.style.left = `${x + offsetX}px`;
+          spark.style.top = `${y + offsetY}px`;
+          spark.style.transform = `rotate(${angle * (180 / Math.PI)}deg)`;
+          spark.style.opacity = '0.8';
+
+          // Fade out particles
+          setTimeout(() => {
+            spark.style.opacity = '0';
+          }, 50);
+        });
+      });
+
+      btn.addEventListener('mouseleave', () => {
+        sparkParticles.forEach(spark => {
+          spark.style.opacity = '0';
+        });
+      });
+    });
+
+    // Hide/show navigation on scroll + marquee scroll effect
+    let lastScrollTop = 0;
+    const nav = document.querySelector('nav');
+    const navHeight = nav.offsetHeight;
+    const marquee = document.getElementById('marquee-scroll');
+    let marqueeOffset = 0;
+
+    // UPenn image parallax effect
+    const upennImage = document.getElementById('upenn-image');
+    const upennWrapper = document.querySelector('.upenn-image-wrapper');
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollDelta = scrollTop - lastScrollTop;
+
+      if (scrollTop > lastScrollTop && scrollTop > navHeight) {
+        // Scrolling down & past nav height
+        nav.style.transform = 'translateY(-100%)';
+        nav.style.transition = 'transform 0.3s ease-in-out';
+      } else if (scrollTop < lastScrollTop) {
+        // Scrolling up
+        nav.style.transform = 'translateY(0)';
+        nav.style.transition = 'transform 0.3s ease-in-out';
+      }
+
+      // Marquee scroll effect: down = move left (negative), up = move right (positive)
+      marqueeOffset -= scrollDelta * 0.5; // Adjust multiplier for speed
+      marquee.style.transform = `translateX(${marqueeOffset}px)`;
+
+      // UPenn image parallax effect
+      if (upennWrapper && upennImage) {
         const wrapperRect = upennWrapper.getBoundingClientRect();
         const windowHeight = window.innerHeight;
-        
+
         // Calculate full scroll distance (Window + Element Height)
         const totalTravelDistance = windowHeight + wrapperRect.height;
         const currentTravel = windowHeight - wrapperRect.top;
-        
+
         // Progress 0 to 1
         let progress = currentTravel / totalTravelDistance;
 
         // --- CHANGE THIS NUMBER TO CONTROL SPEED ---
         // Old value: 30. New value: 50.
         // Higher number = More sliding.
-        const movementRange = 50; 
-        
+        const movementRange = 50;
+
         const movement = (progress - 0.5) * movementRange;
 
         upennImage.style.transform = `translateY(${movement}%)`;
-        upennImage.style.clipPath = 'none'; 
+        upennImage.style.clipPath = 'none';
+      }
+      lastScrollTop = scrollTop;
+    });
+
+    // Water ripple effect on mouse movement
+    let lastRippleTime = 0;
+    const rippleThrottle = 100; // Create ripple every 100ms at most
+
+    document.addEventListener('mousemove', (e) => {
+      const currentTime = Date.now();
+
+      // Throttle ripple creation
+      if (currentTime - lastRippleTime < rippleThrottle) {
+        return;
+      }
+
+      lastRippleTime = currentTime;
+      createRipple(e.clientX, e.clientY);
+    });
+
+    // Also create ripple on click
+    document.addEventListener('click', (e) => {
+      createRipple(e.clientX, e.clientY);
+    });
+
+    function createRipple(x, y) {
+      // Create 3 ripples with slight delays for a bubbly effect
+      for (let i = 0; i < 3; i++) {
+        setTimeout(() => {
+          const ripple = document.createElement('div');
+          ripple.className = 'ripple';
+
+          // Position the ripple at the mouse coordinates (centered)
+          ripple.style.left = `${x}px`;
+          ripple.style.top = `${y}px`;
+
+          // Add slight random offset for more organic bubble effect
+          const offsetX = (Math.random() - 0.5) * 20;
+          const offsetY = (Math.random() - 0.5) * 20;
+          ripple.style.transform = `translate(calc(-50% + ${offsetX}px), calc(-50% + ${offsetY}px))`;
+
+          // Vary the size slightly for each ripple
+          const sizeVariation = 0.7 + (Math.random() * 0.6);
+          ripple.style.setProperty('--size-multiplier', sizeVariation);
+
+          document.body.appendChild(ripple);
+
+          // Remove the ripple after animation completes
+          setTimeout(() => {
+            ripple.remove();
+          }, 1200);
+        }, i * 100); // Stagger the ripples
+      }
     }
-  lastScrollTop = scrollTop;
-});
+  </script>
+  <style>
+    .shine-button::before {
+      transform: translate(var(--shine-x, -100px), var(--shine-y, -100px)) translate(-50%, -50%);
+    }
 
-// Water ripple effect on mouse movement
-let lastRippleTime = 0;
-const rippleThrottle = 100; // Create ripple every 100ms at most
+    .shine-button::after {
+      transform: translate(var(--shine-x, -100px), var(--shine-y, -100px)) translate(-50%, -50%);
+    }
+  </style>
 
-document.addEventListener('mousemove', (e) => {
-  const currentTime = Date.now();
+</body>
 
-  // Throttle ripple creation
-  if (currentTime - lastRippleTime < rippleThrottle) {
-    return;
-  }
-
-  lastRippleTime = currentTime;
-  createRipple(e.clientX, e.clientY);
-});
-
-// Also create ripple on click
-document.addEventListener('click', (e) => {
-  createRipple(e.clientX, e.clientY);
-});
-
-function createRipple(x, y) {
-  // Create 3 ripples with slight delays for a bubbly effect
-  for (let i = 0; i < 3; i++) {
-    setTimeout(() => {
-      const ripple = document.createElement('div');
-      ripple.className = 'ripple';
-
-      // Position the ripple at the mouse coordinates (centered)
-      ripple.style.left = `${x}px`;
-      ripple.style.top = `${y}px`;
-
-      // Add slight random offset for more organic bubble effect
-      const offsetX = (Math.random() - 0.5) * 20;
-      const offsetY = (Math.random() - 0.5) * 20;
-      ripple.style.transform = `translate(calc(-50% + ${offsetX}px), calc(-50% + ${offsetY}px))`;
-
-      // Vary the size slightly for each ripple
-      const sizeVariation = 0.7 + (Math.random() * 0.6);
-      ripple.style.setProperty('--size-multiplier', sizeVariation);
-
-      document.body.appendChild(ripple);
-
-      // Remove the ripple after animation completes
-      setTimeout(() => {
-        ripple.remove();
-      }, 1200);
-    }, i * 100); // Stagger the ripples
-  }
-}
-</script>
-<style>
-.shine-button::before {
-  transform: translate(var(--shine-x, -100px), var(--shine-y, -100px)) translate(-50%, -50%);
-}
-.shine-button::after {
-  transform: translate(var(--shine-x, -100px), var(--shine-y, -100px)) translate(-50%, -50%);
-}
-</style>
-</body></html>
+</html>
