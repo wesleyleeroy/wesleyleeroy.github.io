@@ -331,7 +331,7 @@
       </div>
     </div>
   </nav>
-  <header class="relative w-full py-20 lg:py-32 overflow-visible" id="hero">
+  <header class="relative w-full pt-20 lg:pt-32 pb-8 overflow-visible" id="hero">
 
     <div
       class="absolute top-0 right-0 -mr-20 -mt-20 w-[500px] h-[500px] bg-brand-neutral/20 rounded-full blur-3xl pointer-events-none mix-blend-multiply opacity-70">
@@ -340,11 +340,7 @@
       class="absolute bottom-0 left-0 -ml-20 -mb-20 w-[500px] h-[500px] bg-brand-soft/20 rounded-full blur-3xl pointer-events-none mix-blend-multiply opacity-70">
     </div>
     <div class="relative z-10 mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8 flex flex-col items-center">
-      <div
-        class="scale-fade inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-brand-dark shadow-sm mb-8 border border-slate-100 animate-float">
-        <span class="text-brand-primary material-symbols-outlined text-lg">waving_hand</span>
-        Welcome to my shop!
-      </div>
+
       <h1
         class="mx-auto max-w-4xl text-5xl font-bold tracking-tight text-slate-900 sm:text-7xl mb-6 font-display leading-tight">
         <div class="text-reveal-wrap">
@@ -380,7 +376,7 @@
     </div>
 
   </header>
-  <section class="relative py-32 overflow-hidden" id="features">
+  <section class="relative pt-8 pb-32 overflow-hidden" id="features">
 
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
       <div class="text-center mb-2">
@@ -545,7 +541,7 @@
           })();
       </script>
       <!-- Liquid Reveal Card Section -->
-      <section class="-mt-8 flex justify-between items-start gap-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <section class="-mt-8 flex justify-between items-start gap-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <style>
           .liquid-card-container {
             perspective: 1000px;
@@ -1791,6 +1787,265 @@
     </div>
   </div>
 
+  <!-- macOS Dock - Magic UI Style with Magnification -->
+  <div id="magnify-dock-wrapper" class="flex justify-center py-8">
+    <div id="magnify-dock"
+      class="flex items-end gap-2 px-4 py-3 rounded-2xl bg-white/80 backdrop-blur-md border border-gray-200/50 shadow-xl">
+      <!-- Home -->
+      <a href="#hero" class="magnify-dock-icon" data-tooltip="Home">
+        <div
+          class="magnify-icon-inner flex items-center justify-center w-12 h-12 rounded-full bg-transparent hover:bg-gray-100 transition-colors">
+          <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+          </svg>
+        </div>
+      </a>
+
+      <!-- Blog / Pencil -->
+      <a href="#inventory" class="magnify-dock-icon" data-tooltip="Blog">
+        <div
+          class="magnify-icon-inner flex items-center justify-center w-12 h-12 rounded-full bg-transparent hover:bg-gray-100 transition-colors">
+          <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+          </svg>
+        </div>
+      </a>
+
+      <!-- Separator -->
+      <div class="magnify-separator w-px h-8 bg-gray-300 mx-1 self-center"></div>
+
+      <!-- GitHub -->
+      <a href="https://github.com/wesleyleeroy" target="_blank" rel="noopener noreferrer" class="magnify-dock-icon"
+        data-tooltip="GitHub">
+        <div
+          class="magnify-icon-inner flex items-center justify-center w-12 h-12 rounded-full bg-transparent hover:bg-gray-100 transition-colors">
+          <svg class="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+          </svg>
+        </div>
+      </a>
+
+      <!-- LinkedIn -->
+      <a href="https://www.linkedin.com/in/wesleyleeroy/" target="_blank" rel="noopener noreferrer"
+        class="magnify-dock-icon" data-tooltip="LinkedIn">
+        <div
+          class="magnify-icon-inner flex items-center justify-center w-12 h-12 rounded-full bg-transparent hover:bg-gray-100 transition-colors">
+          <svg class="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+          </svg>
+        </div>
+      </a>
+
+      <!-- X / Twitter -->
+      <a href="https://x.com/wesleyleeroy" target="_blank" rel="noopener noreferrer" class="magnify-dock-icon"
+        data-tooltip="X">
+        <div
+          class="magnify-icon-inner flex items-center justify-center w-12 h-12 rounded-full bg-transparent hover:bg-gray-100 transition-colors">
+          <svg class="w-4 h-4 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
+          </svg>
+        </div>
+      </a>
+
+      <!-- Email -->
+      <a href="mailto:wesleyleeroy06@gmail.com" class="magnify-dock-icon" data-tooltip="Send Email">
+        <div
+          class="magnify-icon-inner flex items-center justify-center w-12 h-12 rounded-full bg-transparent hover:bg-gray-100 transition-colors">
+          <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+          </svg>
+        </div>
+      </a>
+    </div>
+
+    <!-- Tooltip for Magnify Dock -->
+    <div id="magnify-dock-tooltip"
+      class="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-gray-900 text-white text-xs font-medium rounded-lg opacity-0 pointer-events-none transition-all duration-150 whitespace-nowrap shadow-lg">
+    </div>
+  </div>
+
+  <style>
+    /* Magnify Dock Styles - macOS Magnification Effect */
+    #magnify-dock {
+      align-items: flex-end !important;
+    }
+
+    .magnify-dock-icon {
+      display: block;
+      transform-origin: bottom center;
+      transition: transform 0.1s ease-out;
+      will-change: transform;
+    }
+
+    .magnify-icon-inner {
+      transition: background-color 0.1s ease;
+    }
+
+    .magnify-separator {
+      transform-origin: bottom center;
+      transition: transform 0.1s ease-out;
+      will-change: transform;
+    }
+
+    #magnify-dock-tooltip {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    #magnify-dock-tooltip.visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-4px);
+    }
+
+    #magnify-dock-tooltip::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid rgb(17, 24, 39);
+    }
+  </style>
+
+  <script>
+    (function () {
+      const dock = document.getElementById('magnify-dock');
+      const dockWrapper = document.getElementById('magnify-dock-wrapper');
+      const dockIcons = dock.querySelectorAll('.magnify-dock-icon');
+      const tooltip = document.getElementById('magnify-dock-tooltip');
+      const separators = dock.querySelectorAll('.magnify-separator');
+
+      // Configuration for Gaussian magnification
+      const maxScale = 1.5;       // Maximum scale for icon directly under cursor
+      const minScale = 1;         // Minimum scale for icons far from cursor
+      const magnifyRange = 150;   // Pixel range for magnification effect
+
+      let isHovering = false;
+      let currentHoveredIcon = null;
+
+      /**
+       * Gaussian function for smooth scaling based on distance
+       */
+      function gaussian(distance, range) {
+        const sigma = range / 2.5;
+        return Math.exp(-(distance * distance) / (2 * sigma * sigma));
+      }
+
+      /**
+       * Calculate scale factor based on distance from cursor
+       */
+      function calculateScale(distance) {
+        const gaussianValue = gaussian(distance, magnifyRange);
+        return minScale + (maxScale - minScale) * gaussianValue;
+      }
+
+      /**
+       * Apply magnification effect based on mouse X position
+       */
+      function applyMagnification(mouseX) {
+        dockIcons.forEach((icon) => {
+          const iconRect = icon.getBoundingClientRect();
+          const iconCenterX = iconRect.left + iconRect.width / 2;
+          const distance = Math.abs(mouseX - iconCenterX);
+          const scale = calculateScale(distance);
+
+          icon.style.transform = `scale(${scale})`;
+
+          // Update tooltip for closest icon
+          if (distance < 25 && isHovering) {
+            if (currentHoveredIcon !== icon) {
+              currentHoveredIcon = icon;
+              showTooltip(icon, scale);
+            }
+          }
+        });
+
+        // Scale separators too
+        separators.forEach((sep) => {
+          const sepRect = sep.getBoundingClientRect();
+          const sepCenterX = sepRect.left + sepRect.width / 2;
+          const distance = Math.abs(mouseX - sepCenterX);
+          const scale = calculateScale(distance);
+          sep.style.transform = `scale(${scale})`;
+        });
+      }
+
+      /**
+       * Reset all icons to default scale
+       */
+      function resetMagnification() {
+        dockIcons.forEach((icon) => {
+          icon.style.transform = 'scale(1)';
+        });
+        separators.forEach((sep) => {
+          sep.style.transform = 'scale(1)';
+        });
+      }
+
+      /**
+       * Show tooltip above icon
+       */
+      function showTooltip(icon, scale = 1) {
+        const tooltipText = icon.getAttribute('data-tooltip');
+        if (!tooltipText) return;
+
+        tooltip.textContent = tooltipText;
+        tooltip.classList.add('visible');
+
+        const iconRect = icon.getBoundingClientRect();
+        const wrapperRect = dockWrapper.getBoundingClientRect();
+        const tooltipX = iconRect.left + iconRect.width / 2 - wrapperRect.left;
+
+        tooltip.style.left = `${tooltipX}px`;
+        // Adjust tooltip position based on scale
+        tooltip.style.top = `-${12 + (scale - 1) * 30}px`;
+      }
+
+      /**
+       * Hide tooltip
+       */
+      function hideTooltip() {
+        tooltip.classList.remove('visible');
+        currentHoveredIcon = null;
+      }
+
+      // Event Listeners
+      dock.addEventListener('mouseenter', () => {
+        isHovering = true;
+      });
+
+      dock.addEventListener('mousemove', (e) => {
+        if (isHovering) {
+          applyMagnification(e.clientX);
+        }
+      });
+
+      dock.addEventListener('mouseleave', () => {
+        isHovering = false;
+        resetMagnification();
+        hideTooltip();
+      });
+
+      // Individual icon listeners for tooltip
+      dockIcons.forEach((icon) => {
+        icon.addEventListener('mouseenter', () => {
+          currentHoveredIcon = icon;
+          showTooltip(icon, 1.5);
+        });
+      });
+    })();
+  </script>
+
+
+
+
   <footer class="relative py-12 overflow-hidden bg-transparent min-h-[500px] flex items-end">
 
     <div class="absolute inset-0 z-0 w-full h-full pointer-events-none opacity-100">
@@ -2061,6 +2316,26 @@
       });
     });
 
+    // Liquid Reveal Cards (Project Cards) - fade in once on scroll
+    const liquidCards = gsap.utils.toArray('.liquid-card-container');
+    liquidCards.forEach((card, index) => {
+      // Set initial state
+      gsap.set(card, { opacity: 0, y: 60 });
+
+      gsap.to(card, {
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 85%',
+          toggleActions: 'play none none none'
+        },
+        opacity: 1,
+        y: 0,
+        duration: 1.2,
+        delay: index * 0.15,
+        ease: elementisEase
+      });
+    });
+
     // Parallax background effect with scroll scrubbing
     gsap.to('#hero-bg', {
       scrollTrigger: {
@@ -2074,32 +2349,30 @@
       ease: 'none'
     });
 
-    // Feature section titles with stagger - repeats on scroll
+    // Feature section titles with stagger - play once on load/scroll
     gsap.from('.feature-title', {
       scrollTrigger: {
         trigger: '.feature-title',
-        start: 'top 80%',
-        end: 'bottom 20%',
-        toggleActions: 'play reverse play reverse'
+        start: 'top 95%',
+        toggleActions: 'play none none none'
       },
-      y: 40,
+      y: 100,
       opacity: 0,
       scale: 0.95,
-      duration: 1,
+      duration: 2,
       ease: elementisEase
     });
 
     gsap.from('.feature-subtitle', {
       scrollTrigger: {
         trigger: '.feature-subtitle',
-        start: 'top 80%',
-        end: 'bottom 20%',
-        toggleActions: 'play reverse play reverse'
+        start: 'top 95%',
+        toggleActions: 'play none none none'
       },
-      y: 20,
+      y: 80,
       opacity: 0,
-      duration: 0.8,
-      delay: 0.2,
+      duration: 2,
+      delay: 0.3,
       ease: elementisEase
     });
 
