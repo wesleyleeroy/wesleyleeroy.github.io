@@ -16,7 +16,7 @@
   <!-- Security: Permissions policy - Disable unnecessary browser features -->
   <meta http-equiv="Permissions-Policy"
     content="geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=()">
-  <title>Wesley Leeroy UPenn 2029</title>
+  <title>Wesley Leeroy</title>
   <link rel="icon" type="image/png" href="favicon.png">
   <link
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
@@ -383,7 +383,7 @@
   <section class="relative py-32 overflow-hidden" id="features">
 
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-      <div class="text-center mb-20">
+      <div class="text-center mb-2">
         <h2 class="text-4xl font-bold text-brand-dark mb-4 font-display feature-title">Why Shop With Me?</h2>
         <p class="text-lg text-slate-500 feature-subtitle">A trusted marketplace experience with personal attention</p>
       </div>
@@ -544,6 +544,231 @@
             observer.observe(canvas);
           })();
       </script>
+      <!-- Liquid Reveal Card Section -->
+      <section class="-mt-8 flex justify-between items-start gap-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <style>
+          .liquid-card-container {
+            perspective: 1000px;
+            cursor: pointer;
+            flex: 1;
+            max-width: 380px;
+          }
+
+          .liquid-card {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: transform 0.15s ease-out;
+            transform-style: preserve-3d;
+            box-shadow:
+              0 25px 50px -12px rgba(0, 0, 0, 0.5),
+              0 0 0 1px rgba(255, 255, 255, 0.1);
+          }
+
+          .liquid-card:hover {
+            box-shadow:
+              0 35px 60px -15px rgba(0, 0, 0, 0.6),
+              0 0 0 1px rgba(255, 255, 255, 0.15);
+          }
+
+          .liquid-card-content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding: 2rem;
+            color: white;
+          }
+
+          .liquid-card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+          }
+
+          .liquid-card-description {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+          }
+
+          /* Liquid spotlight layer */
+          .liquid-spotlight {
+            position: absolute;
+            inset: 0;
+            z-index: 5;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            background: radial-gradient(circle 200px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(30, 64, 175, 0.5) 0%,
+                rgba(37, 99, 235, 0.3) 30%,
+                transparent 70%);
+            filter: url(#liquid-distort);
+          }
+
+          .liquid-card:hover .liquid-spotlight {
+            opacity: 1;
+          }
+
+          /* Shimmer effect */
+          .liquid-shimmer {
+            position: absolute;
+            inset: 0;
+            z-index: 6;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            background: radial-gradient(circle 150px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(255, 255, 255, 0.15) 0%,
+                transparent 60%);
+          }
+
+          .liquid-card:hover .liquid-shimmer {
+            opacity: 1;
+          }
+
+          /* Base gradient overlay */
+          .liquid-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 30% 0%,
+                rgba(30, 64, 175, 0.2) 0%,
+                transparent 50%);
+            z-index: 1;
+          }
+
+          /* Border glow on hover */
+          .liquid-card::after {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 24px;
+            background: linear-gradient(135deg,
+                rgba(30, 64, 175, 0.6) 0%,
+                rgba(37, 99, 235, 0.4) 50%,
+                rgba(30, 64, 175, 0.6) 100%);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+          }
+
+          .liquid-card:hover::after {
+            opacity: 1;
+          }
+        </style>
+
+        <!-- SVG Filter for liquid distortion -->
+        <svg class="absolute w-0 h-0" aria-hidden="true">
+          <defs>
+            <filter id="liquid-distort">
+              <feTurbulence type="fractalNoise" baseFrequency="0.01 0.03" numOctaves="3" seed="2" result="turbulence">
+                <animate attributeName="seed" from="2" to="100" dur="10s" repeatCount="indefinite" />
+              </feTurbulence>
+              <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="30" xChannelSelector="R"
+                yChannelSelector="G" />
+            </filter>
+          </defs>
+        </svg>
+
+        <!-- Card 1 -->
+        <div class="liquid-card-container" data-liquid-card role="region" aria-label="Project Cygnus" tabindex="0">
+          <div class="liquid-card">
+            <div class="liquid-spotlight"></div>
+            <div class="liquid-shimmer"></div>
+            <div class="liquid-card-content">
+              <div>
+                <h2 class="liquid-card-title font-display">Project Cygnus</h2>
+                <p class="liquid-card-description">
+                  An interstellar journey through generative art and sound, creating a unique experience for every user.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="liquid-card-container" data-liquid-card role="region" aria-label="Project Aurora" tabindex="0">
+          <div class="liquid-card">
+            <div class="liquid-spotlight"></div>
+            <div class="liquid-shimmer"></div>
+            <div class="liquid-card-content">
+              <div>
+                <h2 class="liquid-card-title font-display">Project Aurora</h2>
+                <p class="liquid-card-description">
+                  Exploring the boundaries of computational creativity through neural networks and algorithmic design.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="liquid-card-container" data-liquid-card role="region" aria-label="Project Nebula" tabindex="0">
+          <div class="liquid-card">
+            <div class="liquid-spotlight"></div>
+            <div class="liquid-shimmer"></div>
+            <div class="liquid-card-content">
+              <div>
+                <h2 class="liquid-card-title font-display">Project Nebula</h2>
+                <p class="liquid-card-description">
+                  A deep dive into emergent systems and self-organizing patterns in natural phenomena.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <script>
+          (function () {
+            const containers = document.querySelectorAll('[data-liquid-card]');
+
+            containers.forEach(container => {
+              const card = container.querySelector('.liquid-card');
+              const spotlight = container.querySelector('.liquid-spotlight');
+              const shimmer = container.querySelector('.liquid-shimmer');
+
+              if (!card || !spotlight || !shimmer) return;
+
+              // 3D Tilt effect
+              container.addEventListener('mousemove', (e) => {
+                const rect = container.getBoundingClientRect();
+                const dx = e.clientX - rect.left - rect.width / 2;
+                const dy = e.clientY - rect.top - rect.height / 2;
+                const rotateY = (dx / rect.width) * 20;
+                const rotateX = (dy / rect.height) * -20;
+                card.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
+              });
+
+              container.addEventListener('mouseleave', () => {
+                card.style.transform = 'rotateY(0) rotateX(0)';
+              });
+
+              // Liquid spotlight effect
+              card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                spotlight.style.setProperty('--mouse-x', `${x}px`);
+                spotlight.style.setProperty('--mouse-y', `${y}px`);
+                shimmer.style.setProperty('--mouse-x', `${x}px`);
+                shimmer.style.setProperty('--mouse-y', `${y}px`);
+              });
+            });
+          })();
+        </script>
+      </section>
       <div class="features-sticky-container relative">
         <div class="feature-card bg-white rounded-3xl p-10 border border-slate-200 soft-shadow sticky top-20"
           data-index="0">
@@ -1070,6 +1295,481 @@
         animate();
       })();
     </script>
+  </section>
+
+
+  <!-- Liquid Gradient Button Section -->
+  <section class="py-16 flex justify-center">
+    <style>
+      .liquid-btn {
+        --c1: #FFFFFF;
+        --c2: #1E10C5;
+        --c3: #9089E2;
+        --c4: #FCFCFE;
+        --c5: #F9F9FD;
+        --c6: #B2B8E7;
+        --c7: #0E2DCB;
+        --c8: #0017E9;
+        --c9: #4743EF;
+        --c10: #7D7BF4;
+        --c11: #0B06FC;
+        --c12: #C5C1EA;
+        --c13: #1403DE;
+        --c14: #B6BAF6;
+        --c15: #C1BEEB;
+        --c16: #290ECB;
+        --c17: #3F4CC0;
+        position: relative;
+        width: 180px;
+        height: 56px;
+        border-radius: 28px;
+        border: 3px solid #1a1a2e;
+        overflow: hidden;
+        cursor: pointer;
+        text-decoration: none;
+        display: block;
+      }
+
+      .liquid-btn-bg {
+        position: absolute;
+        inset: 0;
+        background: white;
+      }
+
+      .liquid-layers {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        border-radius: 25px;
+      }
+
+      .liquid-layer {
+        position: absolute;
+        pointer-events: none;
+      }
+
+      .liquid-layer svg {
+        transition: all 1.4s ease-in-out;
+      }
+
+      /* Layer positions matching React code */
+      .liquid-layer-0 {
+        width: 443px;
+        height: 121px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        mix-blend-mode: difference;
+        animation: liquid-flow-0 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      }
+
+      .liquid-layer-1 {
+        width: 443px;
+        height: 121px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(164.971deg);
+        mix-blend-mode: difference;
+        animation: liquid-flow-1 10s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      }
+
+      .liquid-layer-2 {
+        width: 443px;
+        height: 121px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-53%, -53%) rotate(-11.61deg);
+        mix-blend-mode: difference;
+        animation: liquid-flow-2 12s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      }
+
+      .liquid-layer-3 {
+        width: 756px;
+        height: 207px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -57%) rotate(-179.012deg);
+        mix-blend-mode: difference;
+        animation: liquid-flow-3 9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      }
+
+      .liquid-layer-4 {
+        width: 756px;
+        height: 207px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-57%, -50%) rotate(-29.722deg);
+        mix-blend-mode: difference;
+        animation: liquid-flow-4 11s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      }
+
+      .liquid-layer-5 {
+        width: 756px;
+        height: 207px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-62%, -24%) rotate(160.227deg);
+        mix-blend-mode: difference;
+        animation: liquid-flow-5 13s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      }
+
+      .liquid-layer-6 {
+        width: 756px;
+        height: 207px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-67%, -29%) rotate(180deg);
+        mix-blend-mode: hard-light;
+        animation: liquid-flow-6 15s cubic-bezier(0.4, 0, 0.2, 1) infinite reverse;
+      }
+
+      /* Smooth continuous flowing animations with liquid-like motion */
+      @keyframes liquid-flow-0 {
+
+        0%,
+        100% {
+          transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        }
+
+        25% {
+          transform: translate(-45%, -55%) scale(1.15) rotate(90deg);
+        }
+
+        50% {
+          transform: translate(-55%, -45%) scale(0.9) rotate(180deg);
+        }
+
+        75% {
+          transform: translate(-48%, -52%) scale(1.1) rotate(270deg);
+        }
+      }
+
+      @keyframes liquid-flow-1 {
+
+        0%,
+        100% {
+          transform: translate(-50%, -50%) scale(1.05) rotate(165deg);
+        }
+
+        20% {
+          transform: translate(-55%, -45%) scale(0.95) rotate(237deg);
+        }
+
+        40% {
+          transform: translate(-45%, -55%) scale(1.2) rotate(309deg);
+        }
+
+        60% {
+          transform: translate(-52%, -48%) scale(0.85) rotate(381deg);
+        }
+
+        80% {
+          transform: translate(-48%, -52%) scale(1.1) rotate(453deg);
+        }
+      }
+
+      @keyframes liquid-flow-2 {
+
+        0%,
+        100% {
+          transform: translate(-53%, -53%) scale(1) rotate(-12deg);
+        }
+
+        33% {
+          transform: translate(-40%, -60%) scale(1.25) rotate(108deg);
+        }
+
+        66% {
+          transform: translate(-60%, -40%) scale(0.8) rotate(228deg);
+        }
+      }
+
+      @keyframes liquid-flow-3 {
+
+        0%,
+        100% {
+          transform: translate(-50%, -57%) scale(1.1) rotate(-179deg);
+        }
+
+        25% {
+          transform: translate(-43%, -50%) scale(0.9) rotate(-89deg);
+        }
+
+        50% {
+          transform: translate(-57%, -43%) scale(1.2) rotate(1deg);
+        }
+
+        75% {
+          transform: translate(-50%, -57%) scale(0.85) rotate(91deg);
+        }
+      }
+
+      @keyframes liquid-flow-4 {
+
+        0%,
+        100% {
+          transform: translate(-57%, -50%) scale(1) rotate(-30deg);
+        }
+
+        20% {
+          transform: translate(-43%, -57%) scale(1.15) rotate(42deg);
+        }
+
+        40% {
+          transform: translate(-57%, -43%) scale(0.9) rotate(114deg);
+        }
+
+        60% {
+          transform: translate(-50%, -50%) scale(1.25) rotate(186deg);
+        }
+
+        80% {
+          transform: translate(-43%, -50%) scale(0.85) rotate(258deg);
+        }
+      }
+
+      @keyframes liquid-flow-5 {
+
+        0%,
+        100% {
+          transform: translate(-62%, -24%) scale(0.95) rotate(160deg);
+        }
+
+        25% {
+          transform: translate(-38%, -76%) scale(1.2) rotate(250deg);
+        }
+
+        50% {
+          transform: translate(-50%, -50%) scale(0.85) rotate(340deg);
+        }
+
+        75% {
+          transform: translate(-76%, -38%) scale(1.15) rotate(430deg);
+        }
+      }
+
+      @keyframes liquid-flow-6 {
+
+        0%,
+        100% {
+          transform: translate(-67%, -29%) scale(1.1) rotate(180deg);
+        }
+
+        33% {
+          transform: translate(-33%, -71%) scale(0.85) rotate(60deg);
+        }
+
+        66% {
+          transform: translate(-50%, -50%) scale(1.2) rotate(-60deg);
+        }
+      }
+
+      .liquid-btn-content {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        z-index: 10;
+        font-weight: 600;
+        font-size: 1.1rem;
+        color: white;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      }
+
+      .liquid-btn-content svg {
+        width: 22px;
+        height: 22px;
+        fill: white;
+      }
+
+      /* Glow effect behind button */
+      .liquid-btn-glow {
+        position: absolute;
+        width: 130%;
+        height: 150%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        filter: blur(25px);
+        opacity: 0.5;
+        z-index: -1;
+        pointer-events: none;
+      }
+    </style>
+
+    <div class="relative">
+      <!-- Glow behind button -->
+      <div class="liquid-btn-glow">
+        <svg viewBox="0 0 1030 280" fill="none" class="w-full h-full">
+          <rect width="1030" height="280" rx="140" fill="url(#glow-grad)" />
+          <defs>
+            <radialGradient id="glow-grad" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0" stop-color="#7D7BF4" />
+              <stop offset="0.5" stop-color="#1E10C5" />
+              <stop offset="1" stop-color="#0B06FC" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <a href="https://github.com/wesleyleeroy" target="_blank" class="liquid-btn">
+        <div class="liquid-btn-bg"></div>
+        <div class="liquid-layers">
+          <!-- Layer 0 -->
+          <div class="liquid-layer liquid-layer-0">
+            <svg viewBox="0 0 1030 280" fill="none" class="w-full h-full">
+              <rect width="1030" height="280" rx="140" fill="url(#lg0)" />
+              <defs>
+                <radialGradient id="lg0" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+                  gradientTransform="translate(287.5 280) rotate(-29.05) scale(689.8 1000)">
+                  <stop offset="0" stop-color="var(--c1)" />
+                  <stop offset="0.188" stop-color="var(--c2)" />
+                  <stop offset="0.26" stop-color="var(--c3)" />
+                  <stop offset="0.329" stop-color="var(--c4)" />
+                  <stop offset="0.443" stop-color="var(--c6)" />
+                  <stop offset="0.538" stop-color="var(--c7)" />
+                  <stop offset="0.632" stop-color="var(--c1)" />
+                  <stop offset="0.726" stop-color="var(--c8)" />
+                  <stop offset="0.818" stop-color="var(--c9)" />
+                  <stop offset="0.844" stop-color="var(--c10)" />
+                  <stop offset="0.906" stop-color="var(--c1)" />
+                  <stop offset="1" stop-color="var(--c11)" />
+                </radialGradient>
+              </defs>
+            </svg>
+          </div>
+          <!-- Layer 1 -->
+          <div class="liquid-layer liquid-layer-1">
+            <svg viewBox="0 0 1030 280" fill="none" class="w-full h-full">
+              <rect width="1030" height="280" rx="140" fill="url(#lg1)" />
+              <defs>
+                <radialGradient id="lg1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+                  gradientTransform="translate(126.5 418.5) rotate(-64.76) scale(533.4 773.3)">
+                  <stop offset="0" stop-color="var(--c1)" />
+                  <stop offset="0.104" stop-color="var(--c12)" />
+                  <stop offset="0.182" stop-color="var(--c13)" />
+                  <stop offset="0.281" stop-color="var(--c1)" />
+                  <stop offset="0.453" stop-color="var(--c6)" />
+                  <stop offset="0.516" stop-color="var(--c7)" />
+                  <stop offset="0.632" stop-color="var(--c1)" />
+                  <stop offset="0.693" stop-color="var(--c8)" />
+                  <stop offset="0.75" stop-color="var(--c14)" />
+                  <stop offset="0.818" stop-color="var(--c9)" />
+                  <stop offset="0.87" stop-color="var(--c10)" />
+                  <stop offset="1" stop-color="var(--c1)" />
+                </radialGradient>
+              </defs>
+            </svg>
+          </div>
+          <!-- Layer 2 -->
+          <div class="liquid-layer liquid-layer-2">
+            <svg viewBox="0 0 1030 280" fill="none" class="w-full h-full">
+              <rect width="1030" height="280" rx="140" fill="url(#lg2)" />
+              <defs>
+                <radialGradient id="lg2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+                  gradientTransform="translate(264.5 339.5) rotate(-42.3) scale(946.5 1372)">
+                  <stop offset="0" stop-color="var(--c1)" />
+                  <stop offset="0.188" stop-color="var(--c2)" />
+                  <stop offset="0.307" stop-color="var(--c1)" />
+                  <stop offset="0.443" stop-color="var(--c15)" />
+                  <stop offset="0.538" stop-color="var(--c16)" />
+                  <stop offset="0.632" stop-color="var(--c1)" />
+                  <stop offset="0.726" stop-color="var(--c17)" />
+                  <stop offset="0.818" stop-color="var(--c9)" />
+                  <stop offset="0.844" stop-color="var(--c10)" />
+                  <stop offset="0.906" stop-color="var(--c1)" />
+                  <stop offset="1" stop-color="var(--c11)" />
+                </radialGradient>
+              </defs>
+            </svg>
+          </div>
+          <!-- Layer 3 -->
+          <div class="liquid-layer liquid-layer-3">
+            <svg viewBox="0 0 1030 280" fill="none" class="w-full h-full">
+              <rect width="1030" height="280" rx="140" fill="url(#lg3)" />
+              <defs>
+                <radialGradient id="lg3" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+                  gradientTransform="translate(860.5 420) rotate(-153.98) scale(957.5 1388.1)">
+                  <stop offset="0.109" stop-color="var(--c11)" />
+                  <stop offset="0.172" stop-color="var(--c2)" />
+                  <stop offset="0.26" stop-color="var(--c13)" />
+                  <stop offset="0.443" stop-color="var(--c6)" />
+                  <stop offset="0.516" stop-color="var(--c7)" />
+                  <stop offset="0.632" stop-color="var(--c1)" />
+                  <stop offset="0.693" stop-color="var(--c8)" />
+                  <stop offset="0.818" stop-color="var(--c9)" />
+                  <stop offset="0.87" stop-color="var(--c10)" />
+                  <stop offset="1" stop-color="var(--c11)" />
+                </radialGradient>
+              </defs>
+            </svg>
+          </div>
+          <!-- Layer 4 -->
+          <div class="liquid-layer liquid-layer-4">
+            <svg viewBox="0 0 1030 280" fill="none" class="w-full h-full">
+              <rect width="1030" height="280" rx="140" fill="url(#lg4)" />
+              <defs>
+                <radialGradient id="lg4" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+                  gradientTransform="translate(264.5 339.5) rotate(-42.3) scale(946.5 1372)">
+                  <stop offset="0" stop-color="var(--c1)" />
+                  <stop offset="0.188" stop-color="var(--c2)" />
+                  <stop offset="0.307" stop-color="var(--c1)" />
+                  <stop offset="0.443" stop-color="var(--c15)" />
+                  <stop offset="0.538" stop-color="var(--c16)" />
+                  <stop offset="0.632" stop-color="var(--c1)" />
+                  <stop offset="0.726" stop-color="var(--c17)" />
+                  <stop offset="0.818" stop-color="var(--c9)" />
+                  <stop offset="1" stop-color="var(--c11)" />
+                </radialGradient>
+              </defs>
+            </svg>
+          </div>
+          <!-- Layer 5 -->
+          <div class="liquid-layer liquid-layer-5">
+            <svg viewBox="0 0 1030 280" fill="none" class="w-full h-full">
+              <rect width="1030" height="280" rx="140" fill="url(#lg5)" />
+              <defs>
+                <radialGradient id="lg5" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+                  gradientTransform="translate(126.5 418.5) rotate(-64.76) scale(533.4 773.3)">
+                  <stop offset="0" stop-color="var(--c1)" />
+                  <stop offset="0.104" stop-color="var(--c12)" />
+                  <stop offset="0.182" stop-color="var(--c13)" />
+                  <stop offset="0.453" stop-color="var(--c6)" />
+                  <stop offset="0.516" stop-color="var(--c7)" />
+                  <stop offset="0.75" stop-color="var(--c14)" />
+                  <stop offset="1" stop-color="var(--c1)" />
+                </radialGradient>
+              </defs>
+            </svg>
+          </div>
+          <!-- Layer 6 -->
+          <div class="liquid-layer liquid-layer-6">
+            <svg viewBox="0 0 1030 280" fill="none" class="w-full h-full">
+              <rect width="1030" height="280" rx="140" fill="url(#lg6)" />
+              <defs>
+                <radialGradient id="lg6" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+                  gradientTransform="translate(287.5 280) rotate(-29.05) scale(689.8 1000)">
+                  <stop offset="0" stop-color="var(--c1)" />
+                  <stop offset="0.188" stop-color="var(--c2)" />
+                  <stop offset="0.443" stop-color="var(--c6)" />
+                  <stop offset="0.726" stop-color="var(--c8)" />
+                  <stop offset="1" stop-color="var(--c11)" />
+                </radialGradient>
+              </defs>
+            </svg>
+          </div>
+        </div>
+        <div class="liquid-btn-content">
+          <!-- Star Icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+          </svg>
+          <span>Github</span>
+        </div>
+      </a>
+    </div>
   </section>
 
   <!-- Defining the Future Marquee -->
